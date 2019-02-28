@@ -1,1 +1,3 @@
 site_name: CBSD
+theme:
+  name: material
