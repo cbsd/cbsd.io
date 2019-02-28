@@ -157,8 +157,8 @@ head -c 30 /dev/random | uuencode -m - | tail -n 2 | head -n1
 For example, issuing the command;
 
 ```
-% env NOCOLOR=1 cbsd jls
-````
+ % env NOCOLOR=1 cbsd jls
+```
 
 will disable the use of color in the output of the names of the jails.
 
