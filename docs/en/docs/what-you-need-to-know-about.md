@@ -5,14 +5,14 @@ CBSD is an additional layer of abstraction for the [jail(8)](https://www.freebsd
 
 The additional functionality CBSD provides uses the following;
 
-    vnet (VIMAGE)
-    zfs
-    racct/rctl
-    ipfw
-    pf/ipfw/ipfilter
-    carp
-    hastd
-    bhyve
+   * [vnet (VIMAGE)](https://www.freebsd.org/cgi/man.cgi?query=vnet&sektion=9)
+   * [zfs](https://www.freebsd.org/doc/handbook/zfs.html)
+   * [racct/rctl](https://www.freebsd.org/cgi/man.cgi?query=rctl&sektion=8)
+   * [ipfw](https://www.freebsd.org/cgi/man.cgi?query=rctl&sektion=8)
+   * [pf/ipfw/ipfilter](https://www.freebsd.org/doc/handbook/firewalls-pf.html)
+   * [carp](https://www.freebsd.org/doc/handbook/carp.html)
+   * [hastd](https://www.freebsd.org/cgi/man.cgi?query=hastd&sektion=8)
+   * [bhyve](https://www.freebsd.org/doc/handbook/virtualization-host-bhyve.html)
 
 While many of these subsystems are not directly related to jails, CBSD uses these components to provide system administrators a more advanced, integrated system in which to implement solutions for issues faced in today's envirnonment.
 This page will provide information to help system administrators familiarize themselves with CBSD. While this page is not intended to be a comprehensive, all encompassing how-to, it will provide details about where files are stored, and how to use CBSD to manage and interact with the virtual environment.
@@ -57,7 +57,6 @@ To access the data use;
 
 ```
 % zfs mount $jname_file_system
-
 ```
 
 The second-largest directory in the CBSD hierarchy is `$workdir/var/db/`. This directory is where the configuration files for all of the jails created are stored. All jail settings are stored in the jails table in an SQLite3 database. The symbolic link `${workdir}/var/db/local.sqlite should` always point to the correct/ current database. The table schema is described in the file `${workdir}/share/local-jails.schema`. SQLite3 can be used to query information about all jails on a node.
