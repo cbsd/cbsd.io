@@ -8,7 +8,6 @@ The additional functionality CBSD provides uses the following;
    * [vnet (VIMAGE)](https://www.freebsd.org/cgi/man.cgi?query=vnet&sektion=9)
    * [zfs](https://www.freebsd.org/doc/handbook/zfs.html)
    * [racct/rctl](https://www.freebsd.org/cgi/man.cgi?query=rctl&sektion=8)
-   * [ipfw](https://www.freebsd.org/cgi/man.cgi?query=rctl&sektion=8)
    * [pf/ipfw/ipfilter](https://www.freebsd.org/doc/handbook/firewalls-pf.html)
    * [carp](https://www.freebsd.org/doc/handbook/carp.html)
    * [hastd](https://www.freebsd.org/cgi/man.cgi?query=hastd&sektion=8)
