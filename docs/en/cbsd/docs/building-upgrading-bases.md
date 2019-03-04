@@ -141,3 +141,13 @@ The next operation over building result (installworld), also should contain *bas
 
 When you have the base in `${workdir}/basejail`,you can go to the [jail creation](https://www.bsdstore.ru/en/12.0.x/wf_jcreate_ssi.html).
 
+
+## Deleting the base
+
+The base can be removed via cbsd removebase command. By default, the version and architecture of your hoster is inherited. If the versions and/or architecture do not match, use the previously described arguments ver, arch, target_arch and stable. For example:
+
+```
+% cbsd removebase
+% cbsd removebase ver=11 stable=1
+% cbsd removebase ver=11.1 stable=0 arch=i386 target_arch=i386
+```
