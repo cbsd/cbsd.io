@@ -94,32 +94,21 @@ cbsd jstart jname='lala*'
 
 ### A brief summary of the filesystem hierarchy CBSD
 
->
-`${workdir}/.rssh/` This directory stores the private keys of remote nodes. The files are added and removed via the command **cbsd node**
->
-`${workdir}/.ssh` This directory stores the private and public keys of the nodes. The directory is created during initialization with the command cbsd initenv. This is also where the public key comes from when the command **cbsd node mode=add** is issued to copy the pub key to a remote host. The Key file name is the md5 sum of the nodename.
->
-`${workdir}/basejail` This directory is used to store the bases and kernels for FreeBSD that are used when creating **baserw=0** jails. These are generated via cbsd buildworld/buildkernel, cbsd installworld/installkernel, or cbsd repo action=get sources=base/kernel)
->
-`${workdir}/etc` Configuration files needed to run **CBSD**
->
-`${workdir}/export` The default directory that will be stored in a file exported by the jail (a cbsd jexport jname=$jname, this directory will file $jname.img)
->
-`${workdir}/import` The default directory containing data to be imported to a jail (a cbsd jimport jname=$jname, will be deployed jail $jname)
->
-`${workdir}/jails` This directory contains the mount point for the root jails that use baserw=0.
->
-`${workdir}/jails-data` This directory stores all jail data. Backup these directories to take a backup of the jails (including fstab and rc.conf files). Note: if a jail uses baserw=1, these directories are the root of the jail when it starts.
->
-`${workdir}/jails-fstab` The fstab file for the jails. The syntax for regular FreeBSD with the only exception that the path to the mount point is written relative to the root jail (record **/usr/ports /usr/ports nullfs rw 0 0** in the file fstab.$jname means that of the master node directory /usr/ports will be mounted at startup in ${workdir}/jails/$jname/usr/ports)
->
-`${workdir}/jails-rcconf` rc.conf files for jail creation. These parameters can be changed using $editor, or via the command ***cbsd jset $jname param=val*** (eg cbsd jset jname=$jname ip="192.168.0.2/24"). To change these settings, the jail should be turned **off**.
->
-`${workdir}/jails-system`  This directory may contain some helper scripts related to the jail (eg wizards to configure, configurators, etc) as well as the preserved jail traffic when using ipfw and its description. This catalog participates in jimport/jexport operations and migration of jail
->
-`${workdir}/var`  This directory contains system information for **CBSD**. For example, in ${workdir}/var/db is an inventory of local and remote nodes that were added.
->
-`/usr/local/cbsd`  A copy of the original files installed by the **CBSD** port. The working scripts for sudoexec can also be found here.
+| Option | Description |
+|:------| :-----------|
+|${workdir}/.rssh/| This directory stores the private keys of remote nodes. The files are added and removed via the command **cbsd node**|
+|${workdir}/.ssh | This directory stores the private and public keys of the nodes. The directory is created during initialization with the command cbsd initenv. This is also where the public key comes from when the command **cbsd node mode=add** is issued to copy the pub key to a remote host. The Key file name is the md5 sum of the nodename. |
+|${workdir}/basejail | This directory is used to store the bases and kernels for FreeBSD that are used when creating **baserw=0** jails. These are generated via cbsd buildworld/buildkernel, cbsd installworld/installkernel, or cbsd repo action=get sources=base/kernel) |
+|${workdir}/etc | Configuration files needed to run **CBSD**|
+|${workdir}/export| The default directory that will be stored in a file exported by the jail (a cbsd jexport jname=$jname, this directory will file $jname.img)|
+|${workdir}/import| The default directory containing data to be imported to a jail (a cbsd jimport jname=$jname, will be deployed jail $jname)|
+|${workdir}/jails | This directory contains the mount point for the root jails that use baserw=0. |
+|${workdir}/jails-data | This directory stores all jail data. Backup these directories to take a backup of the jails (including fstab and rc.conf files). Note: if a jail uses baserw=1, these directories are the root of the jail when it starts. |
+|${workdir}/jails-fstab | The fstab file for the jails. The syntax for regular FreeBSD with the only exception that the path to the mount point is written relative to the root jail (record **/usr/ports /usr/ports nullfs rw 0 0** in the file fstab.$jname means that of the master node directory /usr/ports will be mounted at startup in ${workdir}/jails/$jname/usr/ports) |
+|${workdir}/jails-rcconf | rc.conf files for jail creation. These parameters can be changed using $editor, or via the command ***cbsd jset $jname param=val*** (eg cbsd jset jname=$jname ip="192.168.0.2/24"). To change these settings, the jail should be turned **off**. |
+|${workdir}/jails-system |  This directory may contain some helper scripts related to the jail (eg wizards to configure, configurators, etc) as well as the preserved jail traffic when using ipfw and its description. This catalog participates in jimport/jexport operations and migration of jail |
+|${workdir}/var |  This directory contains system information for **CBSD**. For example, in ${workdir}/var/db is an inventory of local and remote nodes that were added. |
+|/usr/local/cbsd |  A copy of the original files installed by the **CBSD** port. The working scripts for sudoexec can also be found here. |
 
 
 ### Counting jail traffic
