@@ -16,7 +16,7 @@ Work with a repository of bases, kernels and images. The quantity a repository c
 
 obligatory parameters:
 
-+ **action** — can accept value list (get list), get (download), put (upload)
+ **action** — can accept value list (get list), get (download), put (upload)
 
 Arguments which in certain cases aren't obligatory:
 
