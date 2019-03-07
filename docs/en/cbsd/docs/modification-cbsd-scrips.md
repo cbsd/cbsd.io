@@ -130,3 +130,33 @@ In addition, at the start of NAT (**cbsd naton**), this call is made in system:
 for the correct functioning of NAT, and at start of **vnet**-jails (VIMAGE), if_bridge module will be automatically loaded.
 
 Note that CBSD does not remove a record from a `/boot/loader.conf` on deinstall, or for example, if you switch from one NAT framework to another (for example, first-configured PF, then switched to IPFW), then module in loader.conf for pf is remain.
+
+## /usr/local/etc/sudoers.d/cbsd_sudoers file
+
+Most of the **CBSD** commands requires superuser role, and therefore the use utility sudo and the follow configuration file `/usr/local/etc/sudoers.d/cbsd_sudoers`:
+
+```
+Defaults     env_keep += "workdir DIALOG NOCOLOR"
+Cmnd_Alias   CBSD_CMD = /usr/jails/sudoexec/*,/usr/local/cbsd/sudoexec/*
+cbsd   ALL=(ALL) NOPASSWD: CBSD_CMD
+```
+
+These records can run scripts with root authority in the following directories:
+
+```
+/usr/jails/sudoexec/
+/usr/local/cbsd/sudoexec/
+```
+
+and without the need to enter a password **root**
+
+## IPFW rule for jail traffic counting
+
+Currently, if the question **Enable IPFW** is affirmative and IPFW enabled on the system, ipfw will be used for traffic counters of jail when it starts and stopping. In this case, the range of rules for the installation of meters fixed in the file `$workdir/cbsd.conf`. By default, its range between 99 and 2000:
+
+```
+fwcount_st = "99"
+fwcount_end = "2000"
+```
+
+In this latest rule (2000) will be used to set NAT rules, if IPFW selected as a NAT. Accordingly, if you are planning to write their own rules, you need to exclude this range (or adjust it in the configuration file) to go after other rules counters (> fwcount_end). Currently, looking for an alternative way to calculate the traffic jail.
