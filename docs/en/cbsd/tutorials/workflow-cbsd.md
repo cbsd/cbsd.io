@@ -596,3 +596,381 @@ and change ver parameter to **10.0**, then save it via "Commit". Or, as in the s
 On the next run, the jails will mount base 10.0 (on screenshot the base in the system not found and **CBSD** has invited her to download). Of course, with such a upgrade to a new major version, after this operation you need to rebuild the software in the jail or update it through **pkg** — operation is highly desirable because library system changed. As a minimum, to identify this fact we can use the **libchk** utils.
 
 ![](https://www.bsdstore.ru/img/jupgrade1.png)
+
+### Upgrading baserw=1 jails between different versions of the base via CBSD
+
+Upgrade of **baserw=1** takes a different scenario, since on this operation **CBSD** will overwrite the old base system files to the new in jail data directory `$workdir/jails-data/$jname`.
+
+Baseline: we need uprgade jail jail1 **baserw=1** mode (in-law, its root path PATH points in jls pointed to jails-data, rather than jail directory) from 9.2 to 10.0 version.
+
+Verify through the file utility, which reads ELF table that file `/bin/sh` of jails belongs version 9x. And in the same way, check the version of the file after the upgrade:
+
+```
+% file -s /usr/jails/jails-data/jail1-data/bin/sh
+/usr/jails/jails-data/jail1-data/bin/sh: ELF 64-bit LSB executable, x86-64, version 1 (FreeBSD), dynamically linked (uses shared libs), for FreeBSD 9.2, stripped
+```
+
+When stopped jails perform change version through **cbsd jconfig** or **cbsd jset**, then perform the upgrade procedure:
+
+```
+% cbsd jupgrade jname=jail1
+```
+
+This operation causes the system to overwrite all the files in the base jail from your base original directory `$workdir/basejails/base_\*_\*_ver`
+
+![](https://www.bsdstore.ru/img/jupgrade2.png)
+
+### Upgrading baserw=0,1 jail in one version, switch to stable=1
+
+There are cases when you need to upgrade the files in one version, for example, base 10.0 to 10.0-p1. For jails who have mounted base through nullfs (baserw=0), simply re-download the `$workdir/basejail/base_\*_\*_ver` directory to more recent version. For this you can use the command:
+
+```
+% cbsd repo action=get sources=base mode=upgrade
+```
+
+- flags **mode=upgrade** permits to **CBSD** overwrite this directory with new files, if you already have a version of the base for this version. Or, you can build a more recent version of the base, using Building and upgrading bases Also, you can go with the base version with a RELEASE to STABLE (in this case, the name of the base directory will not X.Y, just X. Ie, instead base_\*_\*_9.2 will be used base_\*_\*_9 directory. For this you need in configurator of jail (cbsd jconfig) change the parameter stable=0 to stable=1 (either through cbsd initenv-tui mode is set STABLE branches globally), and do not forget to add stable=1 flags in repo command (if not set globally)
+
+```
+% cbsd repo action=get sources=base mode=upgrade stable=1
+```
+
+Similar rules for jails with baserw=1, it is only necessary to remember after update in **CBSD** to start the update process files by **cbsd jupgrade**
+
+In addition, provided that you have a base system in the corresponding version (or you jail migrated to another server where there is a base more recent), when you start the jail with baserw=1, **CBSD** can automatically check for more recent files for this version and show information message "You have a more recent version of the base in ...":
+
+![](https://www.bsdstore.ru/img/jupgrade3.png)
+
+### Update of configuration files in jail, etcupdate/mergemaster
+
+
+
+// to be continued
+
+## Working with NAT
+
+### natcfg, naton, natoff commands
+
+```
+% cbsd natcfg
+% cbsd naton
+% cbsd natoff
+```
+**Description:**
+
+Jails do not always require external IP, or, for security reasons, a number of services need to deploy on private IPs, so they were not available from the Internet. Thus, the jails may be needed for Internet access.
+
+In this case the NAT translating the private IP address of the jails to external IP of the server. **CBSD** functional has a configuration template NAT rules for translating of private networks [RFC1918](http://tools.ietf.org/html/rfc1918). To do this, this command as the first step is required:
+
+```
+% cbsd natcfg
+```
+for selecting the appropriate framework for which the configuration will be loaded NAT: pf, ipfw and ipfilter. The names of the relevant frameworks
+
+    ***Attention!*** When you configure this, system file /boot/loader.conf nodes will be modified to load the appropriate modules.
+
+Selection framework and IP for NAT alias executed when you first start cbsd initenv, can later be reconfigured through **cbsd initenv-tui** To natip changed in force, you must run **cbsd natcfg** and **cbsd naton** again. Currently, the cbsd configuration NAT limited to the creation of rules for translating private networks. If you need to get something more from simple NAT rule, you can edit the rules file created manually in the directory `$workdir/etc/` in files:
+
+*  **pfnat.conf**, when PF is used
+*  **ipfw.conf**, when IPFW is used, or
+*  **ipfilter.conf**, wnen using IPNAT from IPFilter
+
+Note:
+
+If **nodeip** (IP of nodes), he is within RFC1918 networks for the subnet broadcast NAT rule will not be created. To disable nat control by **CBSD**, use the follow command:
+
+```
+% cbsd natoff
+```
+
+```
+***Attention!*** Be careful, if you activate NAT through ipfw. This rule loads the module ipfw.ko, the settings of which are prohibited by default all packets. If you spend this operation remotely, you can through /boot/loader.conf enable ipfw rule, by default allowing all packets:
+```
+
+```
+ipfw_load="YES"
+net.inet.ip.fw.default_to_accept=1
+```
+
+Example. Start the configurator and activate the NAT through pf, with aliasing-IP as 192.168.1.2, previously initialized in `/etc/rc.conf`:
+
+```
+% cbsd natcfg
+Configure NAT for RFC1918 Network?
+[yes(1) or no(0)]
+yes
+Set IP address as the aliasing NAT address, e.g: 192.168.1.2
+
+Which NAT framework do you want to use: [pf]
+(type FW name, eg pf,ipfw,ipfilter or "exit" for break)
+
+% cbsd naton
+No ALTQ support in kernel
+ALTQ related functions disabled
+No ALTQ support in kernel
+ALTQ related functions disabled
+pfctl: pf already enabled
+```
+## Jails list
+
+### jls command
+
+```
+% cbsd jls
+```
+
+**Description:**
+
+Show the list of jails on a local node or for all added nodes. Through argument display you can specify the fields for output data. If display is not specified, the value takes from `$workdir/etc/defaults/jls.conf` file, which you can change at its discretion via `$workdir/etc/jls.confi`
+
+All possible options for the sample described in the `$workdir/share/jail-arg` file
+
+* **JID** — Jail ID
+* **JNAME** — jail name
+* **IP4_ADDR** — list of assigned IP addresses (IPv4,IPv6)
+* **HOST_HOSTNAME** — FQDN jail
+* **PATH** — root filesystem for jail
+* **STATUS** — On (running), Off (stoped), Unregister (jail has its rc.conf (old format) but not in the SQL database)
+
+Note: Jail in the unregister status may be insert to SQL database via command: cbsd jregister. Also, they are automatically converted on Upgrading stage of cbsd initenv command. In a case when to the local server are added a key of remote of nodes, it is possible to receive the list of all jails in a farm via
+
+```
+cbsd jls alljails=1
+```
+or
+
+```
+cbsd jls alljails=1 shownode=1
+```
+
+for output with node name where jail are hosted. In the output from cbsd jls alljails, it is possible to see only active jails (in status On)for output with node name where jail are hosted. In the output from cbsd jls alljails, it is possible to see only active jails (in status On)
+
+**Example:**
+
+```
+% cbsd jls
+```
+![](https://www.bsdstore.ru/img/jls1.png)
+
+Conclusion customized data (Attention, dashes fields may mean that version of **CBSD** on the remote node is older. Respectively, SQL query in its database does not find relevant records)
+
+![](https://www.bsdstore.ru/img/jls2.png)
+
+## Command execution in jail
+
+### command: jexec
+
+```
+% cbsd jexec
+```
+
+**Description:**
+
+You can run the command in the container from the master environment via **jexec** command
+
+The required parameter is the name of the jail via **jname=**. Everything that comes after - is directly a command and arguments that will be launched in the jail
+
+You can run a command in one container or simultaneously in several. To do this, use the jname= argument mask of the jails name in which the command will be executed.
+
+For example, a mask of the form jname='test*jail' will execute the command in containers with the same name as test1jail, test2jail and so on. If you want to run the command at once in all containers of this node, use jname='*'
+
+Be careful when launching long commands or actions that can lead to interactive dialogues. You can get the output of the last entries of the active log files through the sending of the SIGINFO command by pressing the Ctrl + 't' keys - this functionality will allow you to see and understand at what stage the command is executed in a container.
+
+You will see the execution result on stdout, while the auxiliary messages are on stderr, respectively, if CBSD messages prevent you, use redirection stderr to /dev/null
+
+**Example:**
+
+```
+% cbsd jexec jname='jail*' pkg update -f
+% cbsd jexec jname='*' pkg update -y
+% cbsd jexec jname='*' pkg clean -ya
+```
+![](https://www.bsdstore.ru/img/jexec1.png)
+
+Multiple command execution:
+
+<script type="text/javascript" src="https://asciinema.org/a/136221.js" id="asciicast-136221" async></script>
+
+## Jail login
+
+### jlogin command
+
+```
+% cbsd jlogin
+```
+**Description:**
+
+Performs a login to the jail as root user. If the jail isn't present on the local node, but rather on one of the remote nodes, **jlogin** will attempt to login over ssh.
+
+If no jail is specified, a list of all known online jails in the farm is displayed (provided remote hosts were added).
+
+If you remotely connect to a jail and node which have **tmux** installed, tmux will be launched at login and the session is given the name taken from the server's *nodename* (taken from jlogin).
+
+Additional sessions will automatically join the tmux session through a **tmux-attach**. When the last connection is closed the tmux session ends (you may detach via Ctrl + b , d to keep it running).
+
+Should you prefer NOT to use tmux on jlogin, copy `${workdir}/defaults/jlogin.conf` to `${workdir}/etc/jlogin.conf` and set tmux_login to 0.
+
+In order to deactivate "try to login?" when logging in to remote nodes, set always_rlogin to 1 in your `${workdir}/etc/jlogin.conf`.
+
+**Example:**
+
+```
+% cbsd jlogin kde4
+```
+Starting with the version of CBSD 11.1.2, you can customize the command, redefining the action on you more suitable
+
+This is achieved through the configuration file blogin.conf and the parameter login_cmd.
+
+The file can be placed for the individual environment in the directory `$workdir/jails-system/$jname/etc`, and globally, overwriting the value from `$workdir/etc/defaults/blogin.conf`. To do this, create a file with your configuration in the directory `$workdir/etc/`
+
+With a custom call, you can use **CBSD** variables - for this or that environment
+
+For example, if you want instead of the standard behavior, when the blogin lauched ssh client, the file `$workdir/etc/blogin.conf` can look like this:
+
+```
+login_cmd="/usr/bin/ssh your_user@${ipv4_first}"
+```
+![](https://www.bsdstore.ru/img/jlogin1.png)
+
+![](https://www.bsdstore.ru/img/jlogin2.png)
+
+## Work with jail parameters
+
+### jget, jset commands
+
+```
+% cbsd jget
+```
+
+```
+% cbsd jset
+```
+
+**Description:**
+
+**Example:**
+
+## Jail cloning
+
+### jclone command
+
+**Description:**
+
+Creates a clone of a given jail. The command requires the name of the original jail (passed with old) as well as a name for the clone, specified with new and a FQDN (hostname) with host_hostname. Optionally a new IP Address can be given with the ip4_addr parameter (multiple IPs need to be separated by commas)
+
+```
+***Attention*** : Since 11.0.10 version, CBSD on ZFS-based hosters will be use ZFS clone features!
+
+```
+
+ZFS clone features is ultra fast operation (thanks to Copy-on-write), but imposes some restrictions - you will be dependent on the parent snapshot. If you try to remove parent environment, CBSD automatically executes the **zfs promote** command, but when you works with snapshot independently - just keep it in your mind
+
+You can control this behaviour via **clone_method=** argument or, to set it globally, use *rclone.conf* and *bclone.conf* to overwrite settings from 'auto' to 'rsync':
+
+```
+% echo 'clone_method="rsync"' > ~cbsd/etc/rclone.conf
+    % echo 'clone_method="rsync"' > ~cbsd/etc/bclone.conf
+    <pre>       <p>When <i>~cbsd/etc/bclone.conf</i> (for bclone) and <i>~cbsd/etc/rclone.conf</i> contain:
+    </p><pre>       clone_method="rsync"
+    </pre>
+    <p>Clone will not use zfs clone even on ZFS filesystem and you will get full copy via rsync</p>
+    <p><strong>Example:</strong></p>
+    <p>cloning jail jail2 to jail3 with changes ip address <strong>ip4_addr</strong> and name of hosts <strong>host_hostname</strong>:</p>
+    <pre class="brush:bash;ruler:true;">            % cbsd jclone old=jail2 new=jail3 host_hostname=jail3.my.domain ip4_addr=10.0.0.22/24
+    </pre>
+    <p class="text-center"><img src="/img/jclone1.png" alt=""></p>
+</pre>
+```
+
+## Jails snapshot (zfs-only)
+
+### jsnapshot command
+
+```
+% cbsd jsnapshot
+```
+
+**Description:**
+
+A variety of operations on jails become available through **jsnapshot** when the node is kept on a ZFS filesystem and **zfsfeat** is set to 1 in `$workdir/nc.inventory`. The mode parameter is used to specify which of the following actions are taken:
+
+* **create** — create a snapshot
+* **list** — show a list of existing snapshots for the selected jail
+* **destroy** — delete a specific snapshot of the jail
+* **destroyall** — remove all of the jail's snapshots
+* **clone** — clone an existing snapshot into new jail
+* **rollback** — rollback the selected jail to current snapshot state
+
+Additional arguments:
+
+* **jname** — specifies the jail upon which the action will be performed
+* **snapname** — gives the snapshot a name
+
+It should be kept in mind that snapshots follow a tree structure. This means, if you created a series of snapshots : **1,2,3,4** and roll back to snapshot **2**, then the snapshots **3** and **4** will be lost, since from the point of snapshot 2 they did not exist yet. Also use a unique name for a snapshot at creation. You can specify snapname=gettimeofday. In this case, the system automatically sets the current timestamp as the name for the new snapshot. When listing snapshots, you can use modifiers to customize output fields with arguments to **display=**
+**Example:**
+
+create snapshot named gromozeka for **jail1** jail:
+
+```
+% cbsd jsnapshot mode=create jname=jail1 snapname=gromozeka
+```
+
+create snapshot named zelepuka for **jail1** jail:
+
+```
+% cbsd jsnapshot mode=create jname=jail1 snapname=zelepuka
+```
+
+Run jail1 and stop after some modification:
+
+```
+% cbsd jstart jail1
+..
+% cbsd jexec jname=jail1 cp /bin/date /root
+% cbsd jexec jname=jail1 file -s /root/date
+/root/date: ELF 64-bit LSB executable, x86-64, version 1 (FreeBSD), dynamically linked (uses shared libs), for FreeBSD 9.0 (900506), stripped
+% cbsd jstop jail1
+..
+```
+Rollback jail1 to snapshot zelepuka state:
+
+```
+% cbsd jsnapshot mode=rollback snapname=zelepuka jname=jail1
+% cbsd jstart jail1
+...
+% cbsd jexec jname=jail1 file -s /root/date
+/root/date: ERROR: cannot open `/root/date' (No such file or directory)
+```
+![](https://www.bsdstore.ru/img/jsnapshot1.png)
+
+![](https://www.bsdstore.ru/img/jsnapshot2.png)
+
+## Jail export
+
+### jexport command
+
+```
+% cbsd jexport
+```
+
+**Description:**
+
+```
+***Attention*** : command execution allows on jail in status On. However it is necessary to remember (especially for jail with databases) when you import such jails, with a high probability it is possible to got problems with inconsistency filesystem in jails, old .pid files that can break work of the imported jails
+```
+
+Export jail into file (*.img). In **jname** arguments you can set jail for export. img-file stored in `$workdir/export` directory. Original jail after exports is not modified
+
+You can control compress level via **compress** arguments
+
+CBSD use [xz(1)](https://man.freebsd.org/xz/1), tools for compress images and you can learn in man page about compress diffrence between compress level.
+
+By default CBSD use **compress=6**. You can disable compression with **compress=0**
+
+**Example** (export mysqljail jail to `$workdir/export/mysqljail.img`):
+
+```
+% cbsd jexport jname=mysqljail
+```
+![](https://www.bsdstore.ru/img/jexport1.png)
+
+
