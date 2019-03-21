@@ -973,4 +973,481 @@ By default CBSD use **compress=6**. You can disable compression with **compress=
 ```
 ![](https://www.bsdstore.ru/img/jexport1.png)
 
+## Jail import
 
+### jimport command
+
+```
+% cbsd jimport
+```
+**Description:**
+
+Import jail from (*.img) file.
+
+In **jname** argument you can set full path to file or just filename (without **.img** extension) if file placed in`$workdir/import` directory. img-file after import is not modified. In addition, you can import an image of a jail in an alternate name (for example, you want to deploy the image of the jail1 from `jail1.img`, however, your system already has a jail of the same name). In this case, an argument newjname can be used.
+
+**Example:**
+
+import jail from `/tmp/mysqljail.img` file:
+
+```
+% cbsd jimport jname=/tmp/mysqljail.img
+```
+
+**Example:**
+
+import the image jail2.img placed in `$workdir/import` with a new name **jail5**:
+
+```
+% cbsd jimport jname=jail2 newjname=jail5
+```
+![](https://www.bsdstore.ru/img/jimport1.png)
+
+## Backup and file replication for jail:
+
+### jbackup, j2slave commands
+
+```
+% cbsd jbackup
+```
+**Description:**
+
+**Example:**
+
+## Jail description
+
+### jdescr command
+
+```
+% cbsd jdescr
+```
+**Description**
+
+Each jail can have an optional description/summary. With this it is possible to generate dynamic documentation on admin pages. Using cbsd jdescr by itself outputs a description of all local jails.
+
+Command:
+
+```
+% cbsd jdescr mode=update jname=jname
+```
+
+runs **nvi** in edit mode and opens the description of the jail specified by jname. If you prefer using a different editor such (such as vim or mcedit it can easily be done by passing your choice with the **editor** variable. Descriptions for each jail are stored in a text file residing at `$workdir/jails-system/$jname/descr`, where **jname** is the name of the jail. When a jail is moved or copied with jcoldmigrate, jclone, jimport/export operations, the description will remain the same.
+
+**Example** (running mcedit to modify the kde4 jail using russian UTF8 charset):
+
+```
+% setenv LANG ru_RU.UTF-8
+% cbsd jdescr jname=kde4 editor=mcedit mode=update
+```
+It is advisable to maintain meaningful descriptions as your collection of jails grows. In addition it can be quite convenient to aggregate this information in order to create dashboards and build jail maps. One example of how this could look is the following simple script: [jmap2html.sh.html](https://www.bsdstore.ru/en/misc/jmap2html.sh.html) which generates an overview in the form of a HTML page [dashboard sample](https://www.bsdstore.ru/en/misc/dashboard/index.html)
+
+![](https://www.bsdstore.ru/img/jdescr1.png)
+
+![](https://www.bsdstore.ru/img/jdescr2.png)
+
+## jail cold migration
+
+### jcoldmigrate command
+
+```
+jcoldmigrate
+```
+
+**Description:**
+
+cbsd **jcoldmigrate** does cold (with stoping) migration jail from one node to another. Argmument **node** point for destination node. Preliminary, RSA/DSA key for remote node must be added via **cbsd node mode=add** operation. Also, on a remote node service rsyncd should work (**cbsdrsync**).
+
+By default, the jail status on a new node is inherited — if the jail worked, it also will be automatically started on a new node. If the jail didn't work — remains in Off status. To operate, what status should be on a remote jail not is dependent on a condition on the original, it is possible through parameter **start**.
+
+Jail on the source, after successful **jcoldmigrate** will be stoped and switch to **Slave** status (unregister). In rc.conf file of jail on the destination node there will be a record where this jail came from.
+
+Notes: For jcoldmigrate, the next action is performed (in process they pass automatically and aren't visible)
+
+*  copy configuration files to remote node, status of jail set to Slave on remote node (**cbsd j2prepare**)
+*  exec rsync, which does a full copy of the directory with data to remote node (**cbsd j2slave**)
+*  stop jails (if running) on the source node (**cbsd j2slave**)
+*  one more rsync job, for synchronization of those files which be modified
+*  switch jail status on source to Slave (**cbsd jswmode**)
+*  switch jail status to master on the remote node (**cbsd rexe + jswmode**)
+*  If jail was running — start jail on remode node (**cbsd rexe + cbsd jstart**)
+
+**Example**
+
+make cold migration for jail amp123 to netsnap node):
+
+```
+% cbsd jcoldmigrate node=netsnap jname=amp123
+```
+*on the destionation node anything isn't present now:*
+
+![](https://www.bsdstore.ru/img/jcoldmigrate1.png)
+
+*from node cbuilder64 migrate jail amp123 to netsnap:*
+
+![](https://www.bsdstore.ru/img/jcoldmigrate2.png)
+
+*jail amp123 on netsnap was started automatically:*
+
+![](https://www.bsdstore.ru/img/jcoldmigrate3.png)
+
+## Jail limits control
+
+### jrctl, jrctl-tui commands
+
+```
+% cbsd jrctl
+% cbsd jrctl-tui
+```
+
+**Description:**
+
+**CBSD** supports many of FreeBSD's mechanisms for enforcing limits on a jail's resource usage.
+
+### File quotas
+
+Floating file quotas are only possible for jails residing on **ZFS-file** system. For systems stored on **UFS** a similar restrictions can be enforced using an md(4)-based vnode file/image and making use of **mdsize** for the jail).
+
+### Renice prioritization
+
+CBSD uses [renice(8)](http://www.freebsd.org/cgi/man.cgi?query=renice&sektion=8) to prioritize each jail's access to the CPU. This makes it possible to select different priorities on a per jail basis and give the most impoartant jails the highest share of CPU time. For example, you may want to have your distcc jail set to a low priority, give your web server medium and the jail hosting the databse the highest priority. The actual priorization is taken care of by **nice** which gets the value for each jail from jail rctl. The values set here correspond to the behavior of nice(1) — the lowest integer resulting in the highest priority.
+
+Renice example:
+
+1) Let's create an AMP jail and have it run a php script that performs some work (such as [bench.zip](https://www.bsdstore.ru/en/misc/bench.zip) taken from [php-benchmark-script](http://www.php-benchmark-script.com/)). We then clone the jail, calling the first **highprio1** and the second **lowprio1**. Using **cbsd jrctl-tui** we give the first the highest possible priority **-20**, and set the second jail to the lowest priority of **20**. In addition we limit the jail to one core through **cpuset** with **cbsd jconfig** (single-core systems are hard to come by these days and smart schedulers do not allow for a clean experiment without taking this step ;-).
+
+```
+% cbsd jls display=jid,jname,ip4_addr,cpuset
+16   highprio1   10.0.0.121/24  4
+17   lowprio1    10.0.0.122/24  4
+```
+— jid 16 is the higher prioritised jail while jid 17 — is set to a lower priority. Both run on the fourth core.
+
+make poll **top** state congestion **php-fpm** with JID output:
+
+```
+% export iter=1
+% while [ 1 ]; do
+    printf "Iter: $iter" ;
+    iter=$((iter+1))
+    top -jab | grep php
+    sleep 1
+done
+```
+
+We launch the script on both IPs at the same time:
+
+```
+	% fetch -T 300 -o /dev/stdout http://10.0.0.121 & fetch -T 300 -o /dev/stdout http://10.0.0.122 &
+	[1] 65985
+	[2] 65986
+
+	--------------------------------------
+	|        PHP BENCHMARK SCRIPT        |
+	--------------------------------------
+	Start : 2014-01-06 16:28:59
+	Server : @10.0.0.121
+	PHP version : 5.4.23
+	Platform : FreeBSD
+	--------------------------------------
+	test_math                 : 12.870 sec.
+	test_stringmanipulation   : 15.896 sec.
+	test_loops                : 8.968 sec.
+	test_ifelse               : 7.864 sec.
+	--------------------------------------
+	Total time:               : 45.598 sec.
+
+	--------------------------------------
+	|        PHP BENCHMARK SCRIPT        |
+	--------------------------------------
+	Start : 2014-01-06 16:29:02
+	Server : @10.0.0.122
+	PHP version : 5.4.23
+	Platform : FreeBSD
+	--------------------------------------
+	test_math                 : 32.632 sec.
+	test_stringmanipulation   : 18.053 sec.
+	test_loops                : 6.323 sec.
+	test_ifelse               : 5.504 sec.
+	--------------------------------------
+	Total time:               : 62.512 sec.
+
+	[2]    Done                          fetch -T 300 -o /dev/stdout http://10.0.0.122
+	[1]  + Done                          fetch -T 300 -o /dev/stdout http://10.0.0.121
+```
+
+and we can soon observe the following output from top:
+
+```
+Iter: 1
+	65101  16 www           1  35  -20 32548K 11456K CPU4    4   0:35  20.56% php-fpm: pool www (php-fpm)
+	65587  17 www           1  52   20 32548K 11456K RUN     4   0:32   0.00% php-fpm: pool www (php-fpm)
+	Iter: 2
+	65101  16 www           1  60  -20 32548K 11456K RUN     4   0:36  25.98% php-fpm: pool www (php-fpm)
+	65587  17 www           1  42   20 32548K 11456K CPU4    4   0:33   2.10% php-fpm: pool www (php-fpm)
+	Iter: 3
+	65101  16 www           1  60  -20 32548K 11456K CPU4    4   0:36  26.27% php-fpm: pool www (php-fpm)
+	65587  17 www           1  94   20 32548K 11456K RUN     4   0:33   8.59% php-fpm: pool www (php-fpm)
+	Iter: 4
+	65101  16 www           1  61  -20 32548K 11456K CPU4    4   0:37  31.69% php-fpm: pool www (php-fpm)
+	65587  17 www           1  95   20 32548K 11456K RUN     4   0:34   9.47% php-fpm: pool www (php-fpm)
+	Iter: 5
+	65101  16 www           1  62  -20 32548K 11456K CPU4    4   0:37  35.60% php-fpm: pool www (php-fpm)
+	65587  17 www           1  95   20 32548K 11456K RUN     4   0:34  11.18% php-fpm: pool www (php-fpm)
+	Iter: 6
+	65101  16 www           1  64  -20 32548K 11456K CPU4    4   0:38  38.96% php-fpm: pool www (php-fpm)
+	65587  17 www           1  96   20 32548K 11456K RUN     4   0:34  12.79% php-fpm: pool www (php-fpm)
+	..
+```
+
+The jail with jid 16 is getting a larger share of the available CPU cycles and executes almost 1.5 times faster.
+
+## RACCT/RCTL framework
+
+If your kernel has support RACCT/RCTL, you can set limits on the jail and watch the current statistics for jail resources. To do this, there is a command cbsd jrctl, which arguments
+
+```
+% cbsd jrctl mode=apply  ...
+```
+and
+
+```
+% cbsd jrctl mode=unset  ...
+```
+
+automatically called for the install or removal of limits when working **jstart** or **jstop** respectively. By command:
+
+you can see current statistics on the jail resources consumed, which can be used to generate reports and graphs for loading jail, as well as the **CBSD** daemon used to generate recommendations on the need to add new resources and for overload warnings.
+
+By command:
+
+```
+% cbsd jrctl
+```
+
+without arguments you cat see default limits on all jails. Through argument **display** you can specify the fields for output data. If display is not specified, the value takes from `$workdir/etc/defaults/jrctl.conf` file, which you can change at its discretion via `$workdir/etc/jrctl.conf`
+
+You can edit the limits through
+
+```
+% cbsd jrctl-tui jname=jname
+```
+or, if you build a hosting and want to create limits on non-interactively, you can generate a file `$workdir/$jname/jail.limits`
+
+By jrctl you can set the following limits jail:
+
+a) All you can do a framework FreeBSD [rctl(8)](http://man.freebsd.org/rctl/8):
+
+```
+cputime 	   CPU time, in seconds
+
+datasize	   data size, in bytes
+stacksize	   stack size, in bytes
+coredumpsize core dump size, in bytes
+memoryuse	   resident set size, in bytes
+memorylocked locked memory, in bytes
+maxproc 	   number of processes
+openfiles	   file descriptor table size
+vmemoryuse	 address space limit, in bytes
+pseudoterminals  number of PTYs
+swapuse 	   swap usage, in bytes
+nthr		     number of threads
+msgqqueued	   number of queued SysV messages
+msgqsize	   SysV message queue size, in bytes
+nmsgq		     number of SysV message queues
+nsem		     number of SysV semaphores
+nsemop		   number of SysV semaphores modified in a single semop(2) call
+nshm		     number of SysV shared memory segments
+shmsize 	   SysV shared memory size, in bytes
+wallclock	   wallclock time, in seconds
+
+```
+
+![](https://www.bsdstore.ru/img/jrctl1.png)
+
+![](https://www.bsdstore.ru/img/jrctl2.png)
+
+## expose: tcp/udp port forwarding from master host to jail
+
+### jail2iso command
+
+```
+% cbsd jail2iso
+```
+
+**Description:**
+
+The **jail2iso** script allows tirmomg a specified jail into bootable images for CD/DVD/Memstick media or the **bhyve** hypervisor. Despite **jail2iso** not being used by **CBSD** itself for its operation or jails, the script can be very useful for easy and comfortable creation of customized LiveCDs, and testing their configuration in a jail environment. This functionality can be useful when:
+
+*  Creating rescue-system with desired tools
+*  Building your own FreeBSD distribution
+*  Creating images for diskless servers/stations (eg booted from PXE, MicroSD, Flash, CD/DVD, etc.) and have mounted home directories or jails/data files from NFS/FibreChannel/iSCSI/InfiniBand.
+*  Transfering environment from jail to a bhyve image to make use of bhyve features
+
+## Script job for iso/memstick
+
+* Creation of file hierarchy of next image consisting of mounted base and data of a jail
+* Creation of MFS/UZIP of an image which will remain in memory. It is used generally for work acceleration in the LiveCD mode, allowing for "cache" often caused utilities and libraries, for example from / to /usr.
+*  Mount over MFS of hierarchy of data from file system of the media through nullfs/RO
+*  Mount through tmpfs over RO file system for modification in LiveCD mode.
+
+If you need a number of directories reload when loading image in RW via tmpfs, before executing jail2iso you needs to be written to a file `$systemdir/jail/tmpfsdir` all the path. For example rescuebsd jail is a file: `/usr/jails/jails-system/rescuebsd/tmpfsdir` with content:
+
+```
+/root
+/var/run
+/var/cache
+/var/db
+/var/spool
+/var/log
+/usr/home
+/usr/local/etc
+```
+These entries are processed `/etc/rc.d/tmpfsdir`, which will save to the image by **jail2iso**. All contents of these files, which is on the jail, will be moved to tmpfs filesystem. As RW areas are mounted through TMPFS, the quantity of memory available to record will depend on quantity of RAM of servers on which LiveCD is started.
+
+You may prefer to write your own `/boot/loader.conf` to created image. To do this, save the file **loader.conf** in the directory `$systemdir/$jname/`. Everything you write in this file will be added to loader.conf, generated **jail2iso**, which has the following mandatory entries:
+
+```
+kern.ipc.shmmni=4096
+kern.ipc.shmseg=4096
+radeonkms_load="YES"
+i915kms_load="YES"
+linux_load="YES"
+```
+
+You can specify what type of image **jail2iso** is to create, ISO image with cd9960 for CD/DVD/VMs or Memstick, an image that you can burn to a USB Flash drive.
+
+## Script job for bhyve image
+
+Since the image will be initially bhyve mode RW, it does not require the creation of RO image with UZIP and support tmpfsdir, so at this stage there is no formation of an image. The script will automatically create a fstab-entry to mount an appropriate device in bhyve machine and updates /etc/ttys as required instructions. When creating an image bhyve, use the parameter:
+
+```
+% cbsd jail2iso ... freesize=
+```
+
+Because without this option, create disk volume equal to the volume of evidence, without reserve. This will make the system broken, so through **freesize=** further specify the amount of free space in the image there after copying master data.
+
+For more information
+
+**cbsd jail2iso** is not controlled and does not limit the volume of the final result — they are limited only by your destination media:
+
+For create ISO image use:
+
+```
+%  cbsd jail2iso media=iso ..
+```
+For create memstick image use:
+
+```
+% cbsd jail2iso media=memstick ..
+```
+For create bhyve image use:
+
+```
+% cbsd jail2iso media=bhyve freesize=XXg ..
+```
+
+Directory where to save the image specified as an argument dstdir.
+
+By default, the image will be have GENERIC kernel from `$workdir/basejail/` directory. You can get this kernel via
+
+```
+% cbsd repo action=get sources=kernel
+```
+for your version of FreeBSD, or build it yourself through **cbsd buildkernel**. If the GENERIC kernel is not suitable as an argument name for **jail2iso** you can specify a different kernel if you have it.
+
+In addition, to reduce the size of the final image, jail2iso a series of actions:
+
+*  removal .a-archive files in lib directories
+*  removing unnecessary data by file list
+
+By default, this list is located in the `$workdir/share/jail2iso-prunelist`. You can correct them if you needed, or create your own, specifying the path to it as an argument **prunelist**
+
+Example of creating memstick from jail1:
+
+```
+% cbsd jail2iso media=memstic jname=jail dstdir=/tmp
+```
+If the file `/tmp/jail1.img` created, it can be writte to a USB device via the command:
+
+```
+dd if=/tmp/mc.img of=/dev/da0 bs="10240" conv="sync"
+```
+where `/dev/da0` — is USB Flash storage.
+
+Example of creating and launching bhyve image from jail1 with networks via interface **em0**:
+
+```
+% cbsd jail2iso media=bhyve jname=jail1 dstdir=/tmp freesize=1g
+% kldload vmm
+% kldload if_tap
+% sysctl -w net.link.tap.up_on_open=1
+% ifconfig tap0 create
+% ifconfig bridge0 create
+% ifconfig bridge0 addm em0 addm tap0
+% ifconfig bridge0 up
+% sh /usr/share/examples/bhyve/vmrun.sh -d /tmp/jail1-10.0_amd64.img vm1
+
+```
+where `/tmp/jail1-10.0_amd64.img` — result from jail2iso.
+
+## Searching for jail in node farm
+
+### jwhereis, jailmapdb commands
+
+```
+% cbsd jwhereis
+% cbsd jailmapdb
+```
+
+**Description:**
+
+Should you manage more than one FreeBSD/cbsd node farm, you can generate a map with jail locations refering to the appropriate servers. The utility jlogin is used in order to search remote jails. This map can be used for a variety of tools, such as a custom admin panel, automatically documentating the farm, as well as a variety of services. For example, a Bacula jail can automatically search the map for new jails and create configuration for their backup; or when a jail migrates from one physical node to another the target host can be reconfigured with jails for backup without the need for manual interaction by the system administrator.
+
+## A few words about jail traffic counting
+
+### command: fwcounters
+
+**Description:**
+
+Currently, the easiest way to count traffic - use functional of **ipfw count** on the JID of necessary environment.
+
+Necessary conditions for the implementation of this:
+
+*  loaded module **ipfw.ko**;
+*  mounted in **CBSD** (for example via **cbsd initenv-tui**) ipfw_enable parameters to 1;
+*  count the presence of the rules in **ipfw** before any other firewall rules.
+
+CBSD starting and stopping the jails and removes automatically sets the rules for traffic jail, using a range of these rules settingCBSD (range by default fwcount_st="99" - fwcount_end="2000" )
+
+In other words, if you want to count traffic and still have the ability to filter traffic, create filtering rules above 2000 and not taking rules from 99 to 2000.
+
+Collect of traffic occurs 1 time per hour or when stopping the jail and stored in SQLite3 base, located in the system directory jail: `$workdir/jails-system/$jname/traffic/YYYY-MM.sqlite`, where YYYY, MM - year and month.
+
+Example. Enjoying the traffic statistics for the jail kde4. meaning of the fields **outgoing** and **incoming** - in bytes:
+
+```
+root@home:/ # sqlite3 /usr/jails/jails-system/kde4/traffic/2014-09.sqlite
+SQLite version 3.8.6 2014-08-15 11:46:33
+Enter ".help" for usage hints.
+
+sqlite> .schema traffic
+CREATE TABLE traffic (  dt TIMESTAMP DATE DEFAULT (datetime('now','localtime')) UNIQUE PRIMARY KEY, incoming integer, outgoing integer  );
+
+sqlite> select * from traffic order by dt desc limit 15;
+2014-09-20 15:00:52|142704274|4958246
+2014-09-20 14:00:51|163907026|25242205
+2014-09-20 13:00:49|3894888|182821
+2014-09-20 05:49:53|58329247|41769720
+2014-09-20 05:00:23|24247445|3464945
+2014-09-20 04:00:56|67749758|39433640
+2014-09-20 02:28:36|11767628|438283
+2014-09-20 02:00:57|115675943|10809029
+2014-09-20 01:00:54|279397568|156221677
+2014-09-20 00:00:51|223665101|6232876
+2014-09-19 23:00:50|250122634|8619979
+2014-09-19 22:00:49|221508227|6458218
+2014-09-19 01:00:42|64715837|3443253
+2014-09-19 00:00:38|109266525|8541659
+2014-09-18 23:00:34|99594683|20380707
+sqlite>
+```
