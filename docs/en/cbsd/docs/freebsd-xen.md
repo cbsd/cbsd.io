@@ -8,4 +8,8 @@ Since CBSD provides only a script wrapper to work with XEN, for their work you n
 
 To create and operate with XEN through the CBSD, use the prefix x for the corresponding commands: xconstruct-tui, xls, xstop, xstart, xremove
 
-Demo:[XEN on FreeBSD via CBSD](https://www.youtube.com/watch?v=0jQwc5m9aG4)
+Demo:
+
+**XEN on FreeBSD via CBSD**
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/0jQwc5m9aG4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
