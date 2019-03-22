@@ -1,4 +1,6 @@
-# Priority launch environments
+# Jail starting order
+
+*Priority launch environments*
 
 **Commands: jorder, jorder-tui, border, border-tui**
 
