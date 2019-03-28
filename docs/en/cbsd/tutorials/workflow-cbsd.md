@@ -1237,30 +1237,27 @@ By jrctl you can set the following limits jail:
 
 a) All you can do a framework FreeBSD [rctl(8)](http://man.freebsd.org/rctl/8):
 
-```
-cputime 	   CPU time, in seconds
-
-datasize	   data size, in bytes
-stacksize	   stack size, in bytes
-coredumpsize core dump size, in bytes
-memoryuse	   resident set size, in bytes
-memorylocked locked memory, in bytes
-maxproc 	   number of processes
-openfiles	   file descriptor table size
-vmemoryuse	 address space limit, in bytes
-pseudoterminals  number of PTYs
-swapuse 	   swap usage, in bytes
-nthr		     number of threads
-msgqqueued	   number of queued SysV messages
-msgqsize	   SysV message queue size, in bytes
-nmsgq		     number of SysV message queues
-nsem		     number of SysV semaphores
-nsemop		   number of SysV semaphores modified in a single semop(2) call
-nshm		     number of SysV shared memory segments
-shmsize 	   SysV shared memory size, in bytes
-wallclock	   wallclock time, in seconds
-
-```
+|cputime 	|   CPU time, in seconds|
+| ---     |     ---               |
+| datasize	|   data size, in bytes |
+|	stacksize	|   stack size, in bytes |
+| coredumpsize |  core dump size, in bytes |
+|	memoryuse	|   resident set size, in bytes |
+|	memorylocked	|  locked memory, in bytes |
+| maxproc |	   number of processes |
+|	openfiles	 |  file descriptor table size |
+|	vmemoryuse	|  address space limit, in bytes |
+|	pseudoterminals |  number of PTYs |
+| swapuse 	|   swap usage, in bytes |
+|	nthr |		   number of threads |
+|	msgqqueued	|  number of queued SysV messages |
+|	msgqsize	|  SysV message queue size, in bytes |
+| nmsgq		|  number of SysV message queues |
+|	nsem		|   number of SysV semaphores |
+| nsemop	|	   number of SysV semaphores modified in a single semop(2) call |
+|	nshm		|   number of SysV shared memory segments |
+|	shmsize 	|   SysV shared memory size, in bytes |
+|	wallclock	|   wallclock time, in seconds |
 
 ![](https://www.bsdstore.ru/img/jrctl1.png)
 
