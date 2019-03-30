@@ -1,4 +1,4 @@
-#Wirking with packages and pkg(7) in jail via CBSD
+#Working with packages and pkg(7) in jail via CBSD
 
 **Command: pkg**
 
