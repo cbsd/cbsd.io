@@ -106,11 +106,11 @@ For example, to change ip of jail1:
 ```
 *cbsd jconfig jname=jail2*
 
-![](https://www.bsdstore.ru/img/jconfig1.png)
+![](img/jconfig1.png)
 
 *cbsd jset*
 
-![](https://www.bsdstore.ru/img/jconfig2.png)
+![](img/jconfig2.png)
 
 ## Custom scripts for starting and stopping action on jailI
 

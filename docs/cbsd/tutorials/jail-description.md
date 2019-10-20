@@ -25,6 +25,6 @@ runs **nvi** in edit mode and opens the description of the jail specified by **j
 It is advisable to maintain meaningful descriptions as your collection of jails grows. In addition it can be quite convenient to aggregate this information in order to create dashboards and build jail maps. One example of how this could look is the following simple script: [jmap2html.sh.html](https://www.bsdstore.ru/en/misc/jmap2html.sh.html) which generates an overview in the form of a HTML page [dashboard sample](https://www.bsdstore.ru/en/misc/dashboard/index.html)
 
 
-![](https://www.bsdstore.ru/img/jdescr1.png)
+![](img/jdescr1.png)
 
-![](https://www.bsdstore.ru/img/jdescr2.png)
+![](img/jdescr2.png)

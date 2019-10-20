@@ -37,8 +37,8 @@ for output with node name where jail are hosted. In the output from cbsd jls all
 % cbsd jls
 ```
 
-![](https://www.bsdstore.ru/img/jls1.png)
+![](img/jls1.png)
 
 Conclusion customized data (Attention, dashes fields may mean that version of **CBSD** on the remote node is older. Respectively, SQL query in its database does not find relevant records)
 
-![](https://www.bsdstore.ru/img/jls2.png)
+![](img/jls2.png)

@@ -37,7 +37,7 @@ To get started with bhyve via **CBSD**, type in the command line:
 If your system lacks any components or settings, you will see the appropriate prompts that need to be performed.
 When ready, you will see a dialog-based menu for creating a virtual machine:
 
-![](https://www.bsdstore.ru/img/bconstruct-tui1.png)
+![](img/bconstruct-tui1.png)
 
 The options **vm_os_profile, jname,** and **imgsize** - are mandatory for manual input
 Start creating a virtual machine by selecting the OS type and selecting the OS profile
@@ -46,11 +46,11 @@ If you start the virtual machine for the first time, when you start, the corresp
 
 A number of parameters (bhyve arguments) are available in the submenu **bhyve_options**:
 
-![](https://www.bsdstore.ru/img/bconstruct-tui2.png)
+![](img/bconstruct-tui2.png)
 
 and **vnc_options**:
 
-![](https://www.bsdstore.ru/img/bconstruct-tui3.png)
+![](img/bconstruct-tui3.png)
 
 Please note that when you enter the imgsize parameter, you specify the amount of the first (boot) virtual hard disk.
 

@@ -106,6 +106,6 @@ Each client receives personal private switch and its virtual machines are only c
 
 schematically it might look like this:
 
-![](https://www.bsdstore.ru/img/cbsd_netopt1.png)
+![](img/cbsd_netopt1.png)
 
-![](https://www.bsdstore.ru/img/cbsd_netopt2.png)
+![](img/cbsd_netopt2.png)

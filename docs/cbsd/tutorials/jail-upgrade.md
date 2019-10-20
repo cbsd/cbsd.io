@@ -84,7 +84,7 @@ and change ver parameter to **10.0**, then save it via "Commit". Or, as in the s
 
 On the next run, the jails will mount base 10.0 (on screenshot the base in the system not found and **CBSD** has invited her to download). Of course, with such a upgrade to a new major version, after this operation you need to rebuild the software in the jail or update it through **pkg** — operation is highly desirable because library system changed. As a minimum, to identify this fact we can use the **libchk** utils.
 
-![](https://www.bsdstore.ru/img/jupgrade1.png)
+![](img/jupgrade1.png)
 
 ### Upgrading baserw=1 jails between different versions of the base via CBSD
 
@@ -106,7 +106,7 @@ When stopped jails perform change version through **cbsd jconfig or cbsd jset**,
 ```
 This operation causes the system to overwrite all the files in the base jail from your base original directory `$workdir/basejails/base_\*_\*_ver`
 
-![](https://www.bsdstore.ru/img/jupgrade2.png)
+![](img/jupgrade2.png)
 
 
 There are cases when you need to upgrade the files in one version, for example, base 10.0 to 10.0-p1. For jails who have mounted base through nullfs (baserw=0), simply re-download the `$workdir/basejail/base_\*_\*_ver` directory to more recent version. For this you can use the command:
@@ -124,7 +124,7 @@ Similar rules for jails with baserw=1, it is only necessary to remember after up
 
 In addition, provided that you have a base system in the corresponding version (or you jail migrated to another server where there is a base more recent), when you start the jail with baserw=1, **CBSD** can automatically check for more recent files for this version and show information message "You have a more recent version of the base in ...":
 
-![](https://www.bsdstore.ru/img/jupgrade3.png)
+![](img/jupgrade3.png)
 
 ### Update of configuration files in jail, etcupdate/mergemaster
 

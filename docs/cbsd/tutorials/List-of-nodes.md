@@ -15,4 +15,4 @@ Through argument display you can specify the fields for output data. If display 
 % cbsd node mode=list
 ```
 
-![](https://www.bsdstore.ru/img/nodelist1.png)
+![](img/nodelist1.png)

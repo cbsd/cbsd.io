@@ -31,7 +31,7 @@ For example, having 8 cores, you can configure them as:
 
 As such, the configuration of the virtual machine topology does not affect the speed of the virtual machine itself:
 
-![](https://www.bsdstore.ru/img/cpu_topology_intro.png)
+![](img/cpu_topology_intro.png)
 
 The configuration data becomes important, in conjunction with the settings for binding the virtual machine cores to a particular group of physical server cores (set_affinity, cpu-pinning), as will be discussed separately. The aim of this article is to consider bhyve possibilities and work with its configuration through **CBSD**.
 
@@ -39,18 +39,18 @@ To view the current topology on the host side, use the command cbsd **cpu-topolo
 
 If the virtual machine is bound to a particular core of the physical machine, you will see its name opposite the given kernel of a specific socket. If there are no bindings/pinning, all virtual environments will be opposite each core - since they do not have restrictions on the use of certain kernels and they can migrate than are required by the OS OS master:
 
-![](https://www.bsdstore.ru/img/cbsd_cpu_topology1.png)
+![](img/cbsd_cpu_topology1.png)
 
 A socket is directly a physical processor (package) on your motherboard. If the processor supports hyper-threading (and it is enabled), the virtual cores will be marked as THR
 
 You can create any number of profiles for the topology. You can view their list using vm-cpu-topology:
 
-![](https://www.bsdstore.ru/img/cbsd_cpu_topology3.png)
+![](img/cbsd_cpu_topology3.png)
 
 You can delete or add new ones through the TUI command interface vm-cpu-topology-tui
 
-![](https://www.bsdstore.ru/img/cbsd_cpu_topology2.png)
+![](img/cbsd_cpu_topology2.png)
 
 Profile names must be unique and the application of this or that topology is performed through the command bset, bconfig. And also, the choice of topologies will be available when creating a virtual machine in bconstruct-tui:
 
-![](https://www.bsdstore.ru/img/cbsd_cpu_topology4.png)
+![](img/cbsd_cpu_topology4.png)

@@ -46,12 +46,12 @@ Renaming to **eth0** by the fact that each new epair increments the number of th
 
  *Sets 0 (empty) in ip4_addr field when create vnet-jail*
 
-![](https://www.bsdstore.ru/img/vnet1.png)
+![](img/vnet1.png)
 
  *If the kernel has VIMAGE option, it is possible to set the vnet 1*
 
-![](https://www.bsdstore.ru/img/vnet2.png)
+![](img/vnet2.png)
 
  *Inside the jail. We do what we want, we get your IP, set up ipfw*
-![](https://www.bsdstore.ru/img/vnet3.png)
+![](img/vnet3.png)
 

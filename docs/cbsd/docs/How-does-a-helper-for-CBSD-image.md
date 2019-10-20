@@ -76,7 +76,7 @@ As you can see, all the fields are mandatory. Thus, the value of the parameters 
 % cbsd imghelper /tmp/forms.sqlite
 ```
 
-![](https://www.bsdstore.ru/img/imghelper1.png)
+![](img/imghelper1.png)
 
 Also, we can determine in advance the parameters via the command line (after having received the names of the variables in terms of --help):
 
@@ -89,7 +89,7 @@ External help: /usr/local/share/doc/cbsd/wf_imghelper.html
         % cbsd imghelper /tmp/forms.sqlite username=gelo dns1="1.2.3.4"
 ```
 
-![](https://www.bsdstore.ru/img/imghelper2.png)
+![](img/imghelper2.png)
 
 Finally, we can simply use the environment variables:
 
@@ -100,5 +100,5 @@ Finally, we can simply use the environment variables:
 % setenv H_dsn2 10.0.0.1
 % cbsd imghelper /tmp/forms.sqlite
 ```
-![](https://www.bsdstore.ru/img/imghelper3.png)
+![](img/imghelper3.png)
 

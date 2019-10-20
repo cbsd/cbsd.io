@@ -56,7 +56,7 @@ echo "Jail name: ${jname}; IPs: ${ip4_addr}; Jail status: ${status}
 
 If you are in cbsdsh, then you do not need to enter the prefix cbsd before the CBSD command:
 
-![](https://www.bsdstore.ru/img/cbsdsh1.png)
+![](img/cbsdsh1.png)
 
 The SQLite3 in CBSD is used to store the jail settings for the following reasons:
 

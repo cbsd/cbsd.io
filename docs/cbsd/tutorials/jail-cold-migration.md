@@ -34,13 +34,13 @@ make cold migration for jail amp123 to netsnap node):
 
 on the destionation node anything isn't present now:
 
-![](https://www.bsdstore.ru/img/jcoldmigrate1.png)
+![](img/jcoldmigrate1.png)
 
 
 from node cbuilder64 migrate jail amp123 to netsnap:
 
-![](https://www.bsdstore.ru/img/jcoldmigrate2.png)
+![](img/jcoldmigrate2.png)
 
 jail amp123 on netsnap was started automatically:
 
-![](https://www.bsdstore.ru/img/jcoldmigrate3.png)
+![](img/jcoldmigrate3.png)

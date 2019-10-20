@@ -24,5 +24,5 @@ By default CBSD use **compress=6**. You can disable compression with **compress=
 ```
 % cbsd jexport jname=mysqljail
 ```
-![](https://www.bsdstore.ru/img/jexport1.png)
+![](img/jexport1.png)
 

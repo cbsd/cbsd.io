@@ -59,6 +59,6 @@ Rollback jail1 to snapshot zelepuka state:
 /root/date: ERROR: cannot open `/root/date' (No such file or directory)
 ```
 
-![](https://www.bsdstore.ru/img/jsnapshot1.png)
+![](img/jsnapshot1.png)
 
-![](https://www.bsdstore.ru/img/jsnapshot2.png)
+![](img/jsnapshot2.png)

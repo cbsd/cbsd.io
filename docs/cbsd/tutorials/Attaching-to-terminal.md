@@ -38,7 +38,7 @@ If you want the ssh connection to occur, this file might look like this:
 login_cmd="/usr/bin/ssh your_user@${ipv4_first}"
 ```
 
-![](https://www.bsdstore.ru/img/blogin1.png)
+![](img/blogin1.png)
 
 
-![](https://www.bsdstore.ru/img/blogin2.png)
+![](img/blogin2.png)

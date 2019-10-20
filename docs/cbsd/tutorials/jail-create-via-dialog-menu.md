@@ -82,25 +82,25 @@ See for details:[Profiles for jail creation](https://www.bsdstore.ru/en/12.0.x/w
 ```
 % cbsd jconstruct-tui
 ```
-![](https://www.bsdstore.ru/img/jcreate1.png)
+![](img/jcreate1.png)
 
 When repository configured properly, you can preset to new jail some packages. Use first character of name port for faster searching and hit space for mark it.
 
-![](https://www.bsdstore.ru/img/jcreate2.png)
+![](img/jcreate2.png)
 
 Required fields: a short (one word) the name of the jail. This name is used to identify the jail:
 
-![](https://www.bsdstore.ru/img/jcreate3.png)
+![](img/jcreate3.png)
 
 Required fields full (the domain) name of the cell. This name will be used as jail hostname:
 
-![](https://www.bsdstore.ru/img/jcreate4.png)
+![](img/jcreate4.png)
 
 Required fields: IP address of jail. May have a network prefix with a record like IP/prefix. To assign more than one IP address, use the editing of the file rc.conf jails described in [Jail config](https://www.bsdstore.ru/en/12.0.x/wf_jconfig_ssi.html)
 
-![](https://www.bsdstore.ru/img/jcreate5.png)
+![](img/jcreate5.png)
 
 When you choose item **GO**, you are prompted to create the jail immediately by automatically running **cbsd jcreate jconf=...** Otherwise, you will be the path to the saved configuration to run **cbsd jcreate** by hand:
 
-![](https://www.bsdstore.ru/img/jcreate6.png)
+![](img/jcreate6.png)
 

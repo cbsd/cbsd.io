@@ -21,11 +21,11 @@ In the process of live migration, the node-source uses the functionality to crea
 To migrate, use the command **bmigrate**, which has two arguments - the name (**jname**) a moving virtual machine and the destination node (**node**)
 
 
-![](https://www.bsdstore.ru/img/bmigration1.png)
+![](img/bmigration1.png)
 
 During the migration, the script performs a preliminary check for the compatibility of the nodes, including the presence of common/shared directories (this is **jails-data, jails-rcconf, jails-system** directories in the **CBSD** working environment)
 
-![](https://www.bsdstore.ru/img/bmigration2.png)
+![](img/bmigration2.png)
 
 A small demo at an early stage of development:
 

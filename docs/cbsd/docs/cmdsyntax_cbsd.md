@@ -43,17 +43,17 @@ In line with **opt**: lists the optional arguments (though, depending on the mod
 In the following lines is a brief description of the arguments, if it exist
 Also, it may be a reference to the documentation (External help). It can point to a site and a local file, if installed documentation.
 
-![](https://www.bsdstore.ru/img/cbsd_syntax1.png)
+![](img/cbsd_syntax1.png)
 
 Some of the commands waiting in as a parameter the name of the jails, can be interactive, with a list of jails (including from remote nodes) to choose from. To do this, just run the command with no argument. Examples of these commands:
 
 **cbsd jlogin, cbsd blogin, cbsd jconfig, cbsd bconfig, cbsd jstop, cbsd bstop, cbsd jstart, cbsd bstart**, etc...
 
-![](https://www.bsdstore.ru/img/cbsd_syntax2.png)
+![](img/cbsd_syntax2.png)
 
 In addition, **CBSD** installed as a module for base tools **bsdconfig** (adds itself to the end of the list), which grouped some -tui utility, so some controls CBSD you can perform through the interactive interface, running **bsdconfig cbsd**.
 
-![](https://www.bsdstore.ru/img/cbsd_syntax3.png)
+![](img/cbsd_syntax3.png)
 
 ## Interactivity, the color in the output result
 
@@ -86,4 +86,4 @@ For enable debugging via **sh xtrace** and trace all operation, use **CBSD_DEBUG
 
 Since 10.1.5, **CBSD** can display information not only to understand the human form, but also in HTML, XML and JSON for easy machine parsing and simply for the cyborgs joy
 
-![](https://www.bsdstore.ru/img/cbsd_syntax4.png)
+![](img/cbsd_syntax4.png)

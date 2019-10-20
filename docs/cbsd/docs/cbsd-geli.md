@@ -1,4 +1,4 @@
-# Encrypting images with  cbsd geli
+ Encrypting images with  cbsd geli
 
 There are situations where the information posted on the server's hard drive should preferably be stored in encrypted form. For example, you are setting up a server with important information in any foreign datacenter . There are real cases (author familiar with the case not by hearsay ) when disgruntled employees datacenter can take a few minutes to turn off your server , under any pretext ( breaks technical work — not uncommon) , make an image of the hard drive and turn back , that you will look like rebooting the server , while all the information is from third parties became individuals. Either you rent VDS / VPS, where a stranger to you, not only the data center , but also the server and media.
 
@@ -64,7 +64,7 @@ As is the case with initmaster, if you start a second init file — the system w
 
 Schematically, the interaction with **CBSD** GELI script with the system looks like this:
 
-![](https://www.bsdstore.ru/img/cbsd_geli1.png)
+![](img/cbsd_geli1.png)
 
 ## Using jails fstab to list of crypted images and   mount points
 

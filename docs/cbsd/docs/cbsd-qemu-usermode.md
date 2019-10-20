@@ -22,4 +22,4 @@ Note: because the program will run under qemu, they are have default limit of RA
 #define DEFAULT_RAM_SIZE 512
 ```
 
-![](https://www.bsdstore.ru/img/cbsd_with_qemu.png)
+![](img/cbsd_with_qemu.png)

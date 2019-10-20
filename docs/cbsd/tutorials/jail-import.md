@@ -23,4 +23,4 @@ import the image jail2.img placed in `$workdir/import` with a new name **jail5**
 ```
 % cbsd jimport jname=jail2 newjname=jail5
 ```
-![](https://www.bsdstore.ru/img/jimport1.png)
+![](img/jimport1.png)
