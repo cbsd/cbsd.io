@@ -6,7 +6,7 @@ The implementation of this feature in **bhyve** is grateful to the Politehnica U
 
 At the time this page was published, this functionality was not available in the FreeBSD codebase and was obtained from the project page on [GitHub (FreeBSD-UPB)](https://github.com/FreeBSD-UPB)
 
-This functional is a continuation of the [checkpoints](https://www.bsdstore.ru/en/12.0.x/wf_bcheckpoint_ssi.html) functional
+This functional is a continuation of the [checkpoints](Checkpoints-hibernation-and-pauses.md) functional
 
 Primary requirements:
 

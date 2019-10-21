@@ -116,7 +116,7 @@ cbsd jstart jname='lala*'
 
 **CBSD** uses the count ruleset of **[ipfw](https://www.freebsd.org/doc/en/books/handbook/firewalls-ipfw.html)** filter to count jail traffic. **CBSD** sets the number of counters in the **99 — 2000** range. The range can be easily adjusted in cbsd.conf if this interfes with existing rules. Be mindful when changing firewall rules. **CBSD** "takes ownership" of the rules in the range given. In otherwords, if there are other rules already in place using the specified range, there is the posibility that **CBSD** could delete and re-add the rules in the range. This means all rules in the range would be deleted, but only the CBSD rules would be added back in.
 
-Read more about [counting jail traffic](https://www.bsdstore.ru/en/12.0.x/wf_jailtraffic_ssi.html).
+Read more about [counting jail traffic](a-few-words-about-jail-traffic-counting.md).
 
 
 ### Expose: tcp/udp port forwarding from master host to jail
@@ -124,7 +124,7 @@ Read more about [counting jail traffic](https://www.bsdstore.ru/en/12.0.x/wf_jai
 
 **CBSD** uses the **fwd** ruleset of **ipfw** to configure port forwarding. **CBSD** sets the number of counters in the **2001 - 2999** range. This range can easily be changed in cbsd.conf if need be. Again, always be mindful when changing firewall rules. Make sure no rules conflict with the range configrured for **CBSD** to use.
 
-Read more about [expose](https://www.bsdstore.ru/en/12.0.x/wf_expose_ssi.html).
+Read more about [expose](port-forwarding-for-jail.md).
 
 ### About rsync-based copying jail data between nodes
 

@@ -1,5 +1,5 @@
-# Virtual Machine Configuring
 
+# Virtual Machine Configuring
 **commands: bconfig, bset**
 
 ```
@@ -12,7 +12,7 @@ Configuring the Virtual Machine Settings
 
 Each virtual machine **CBSD** stores the settings in the SQLite3 database. To change the settings of a VM can serve command **cbsd bconfig**, TUI launches menu for changing the basic settings.
 
-Description of relevant parameters, you can read on the page [VM create](https://www.bsdstore.ru/en/12.0.x/wf_bcreate_ssi.html)
+Description of relevant parameters, you can read on the page [VM create](bhyve-virtual-machine.md)
 
 **Custom scripts for starting and stopping action on jail**
 
@@ -40,6 +40,6 @@ You will receive notification upon startup cells by email: root@example.net
 
 The functionality of execution custom scripts and the availability of variables in environments can play a big role in the integration of **CBSD** and external applications, such as **Consul**
 
-As an example of use, see the article [Example of using CBSD/bhyve and ISC-DHCPD (Serve IP address in bhyve through pre/post hooks)](https://www.bsdstore.ru/en/articles/cbsd_vm_hook_dhcpd.html)
+As an example of use, see the article [Example of using CBSD/bhyve and ISC-DHCPD (Serve IP address in bhyve through pre/post hooks)](jail-config.md)
 
-As an example of use, see the article [Example of using CBSD/jail and Consul (Register/unregister jail's via pre/post hooks, in Consul)](https://www.bsdstore.ru/en/articles/cbsd_jail_hook_consul.html)
+As an example of use, see the article [Example of using CBSD/jail and Consul (Register/unregister jail's via pre/post hooks, in Consul)](jail-config.md)

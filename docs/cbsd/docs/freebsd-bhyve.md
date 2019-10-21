@@ -24,7 +24,7 @@ For convenience, the bhyve control commands in CBSD are similar to the jail cont
 
 Using **CBSD**, you can combine in one tool management for both jail containers and virtual machines on the bhyve hypervisor, using this or that approach in different tasks
 
-Additionally, you can read the article:[Jails vs Bhyve (rus)](https://www.bsdstore.ru/ru/articles/bhyve_vs_jails.html)
+Additionally, you can read the article:[Jails vs Bhyve ](../tutorials/Virtual-Machine-Configuring.md)
 
 ## Getting Started with bhyve
 

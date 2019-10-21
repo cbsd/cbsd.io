@@ -74,7 +74,7 @@ Suppose you need to create a series of alike jails which all require a certain s
 ```
 % cbsd jimport jname=jail1 newjname=jail2
 ```
-This creates an image on the basis of jail1 called jail2. Another way to get similar results is making use of [jclone](https://www.bsdstore.ru/en/12.0.x/wf_jclone_ssi.html). However, it is not always convenient (especially in terms of keeping software up to date in the original jail). Another way is to to apply profiles and alternative **skel**-directories for applications we need to change on the fly when creating fresh jails.
+This creates an image on the basis of jail1 called jail2. Another way to get similar results is making use of [jclone](jail-cloning). However, it is not always convenient (especially in terms of keeping software up to date in the original jail). Another way is to to apply profiles and alternative **skel**-directories for applications we need to change on the fly when creating fresh jails.
 
 **Example:**
 

@@ -1,10 +1,10 @@
-# Jail upgrade
 
+# Jail upgrade
 ## Warning
 
 **Description:**
 
-Upgrade procedure jail always carries certain risks in the form of disruption of service, therefore, make it a rule to always create backups of the jail. If you are running on ZFS file system, you can use the command [cbsd jsnapshot](https://www.bsdstore.ru/en/12.0.x/wf_jsnapshot_ssi.html) for a frozen state of the jail before the start of work. For example:
+Upgrade procedure jail always carries certain risks in the form of disruption of service, therefore, make it a rule to always create backups of the jail. If you are running on ZFS file system, you can use the command [cbsd jsnapshot (zfs-only)](jail-snapshot(zfs-only)) for a frozen state of the jail before the start of work. For example:
 
 ```
 % cbsd jsnapshot mode=create jname=jail1 snapname=before_update
@@ -115,7 +115,7 @@ There are cases when you need to upgrade the files in one version, for example, 
 % cbsd repo action=get sources=base mode=upgrade
 ```
 
-- flags **mode=upgrade** permits to **CBSD** overwrite this directory with new files, if you already have a version of the base for this version. Or, you can build a more recent version of the base, using [Building and upgrading bases](https://www.bsdstore.ru/en/base_cbsd.html) Also, you can go with the base version with a RELEASE to STABLE (in this case, the name of the base directory will not X.Y, just X. Ie, instead base_\*_\*_9.2 will be used base_\*_\*_9 directory. For this you need in configurator of jail (cbsd jconfig) change the parameter stable=0 to stable=1 (either through cbsd initenv-tui mode is set STABLE branches globally), and do not forget to add stable=1 flags in repo command (if not set globally)
+- flags **mode=upgrade** permits to **CBSD** overwrite this directory with new files, if you already have a version of the base for this version. Or, you can build a more recent version of the base, using [Building and upgrading bases](building-upgrading-bases.md) Also, you can go with the base version with a RELEASE to STABLE (in this case, the name of the base directory will not X.Y, just X. Ie, instead base_\*_\*_9.2 will be used base_\*_\*_9 directory. For this you need in configurator of jail (cbsd jconfig) change the parameter stable=0 to stable=1 (either through cbsd initenv-tui mode is set STABLE branches globally), and do not forget to add stable=1 flags in repo command (if not set globally)
 
 ```
 % cbsd repo action=get sources=base mode=upgrade stable=1
