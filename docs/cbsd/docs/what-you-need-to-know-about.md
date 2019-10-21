@@ -90,7 +90,7 @@ cbsd jstop jname='*'
 cbsd jstart jname='lala*'
 ```
 
-![exammple](https://www.bsdstore.ru/gif/jnamemask.gif)
+![example](gif/jnamemask.gif)
 
 ### A brief summary of the filesystem hierarchy CBSD
 

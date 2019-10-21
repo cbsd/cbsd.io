@@ -68,5 +68,5 @@ In the absence of rcshutdown_timeout in the system /etc/rc.conf, cbsd initenv wi
 
 Also, keep in mind that when using the zfs features (`$workdir/nc.inventory`, the parameter **zfsfeat=1**), and the file system ZFS, at jstop, file system of jails will be unmounted and those catalog `$workdir/jails-data/jail1-data` will be empty. If in such a case when jail data is requires without running it, by the command **zfs list** You can see the name appropriate file system and run zfs mount **fs**.
 
-![](https://www.bsdstore.ru/gif/jstart.gif)
+![](gif/jstart.gif)
 

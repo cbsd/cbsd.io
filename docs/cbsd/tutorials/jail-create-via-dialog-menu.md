@@ -75,7 +75,7 @@ See for details:[Profiles for jail creation](https://www.bsdstore.ru/en/12.0.x/w
 *  arch - Specify architecture of jail environment
 *  vnet - Enable or disable VIMAGE feature
 
-![](https://www.bsdstore.ru/gif/jcreate.gif)
+![](gif/jcreate.gif)
 
 **Example** (fill for jname, fqdn, ips fields + GO):
 
