@@ -38,6 +38,6 @@ For example, if you want instead of the standard behavior, when the blogin lauch
   login_cmd="/usr/bin/ssh your_user@${ipv4_first}"
 ```
 
-![](https://www.bsdstore.ru/img/jlogin1.png)
+![](img/jlogin1.png)
 
-![](https://www.bsdstore.ru/img/jlogin2.png)
+![](img/jlogin2.png)

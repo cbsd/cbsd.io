@@ -246,7 +246,7 @@ Automatically correct the /etc/resolv.conf, automatically assigning as the prima
 exec_start="/bin/sh /etc/rc";
 exec_stop="/bin/sh /etc/rc.shutdown";
 ```
-System commands for starts and stops jail. If you want to write additional scripts executed by starting and stopping jails see: [Jail config](https://www.bsdstore.ru/en/12.0.x/wf_jconfig_ssi.html#execscript)
+System commands for starts and stops jail. If you want to write additional scripts executed by starting and stopping jails see: [Jail config](../tutorials/jail-config.md)
 
 ```
 cpuset="0";

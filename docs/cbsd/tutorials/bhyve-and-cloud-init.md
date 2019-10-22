@@ -47,16 +47,16 @@ Note: In **CBSD** version 12.0.8, parameter **ci_user_pubkey_user** can accept n
 
 Profiles of cloud images are in the vm_os_profile menu. Select this item in the main menu:
 
-![](https://www.bsdstore.ru/img/cloudinit1.png)
+![](img/cloudinit1.png)
 
 At the bottom of the list, you will see an area with Cloud images, if these profiles are created in **CBSD** for the selected OS family:
 
-![](https://www.bsdstore.ru/img/cloudinit2.png)
+![](img/cloudinit2.png)
 
 Next, configure the network settings, user and public key of the guest machine:
 
-![](https://www.bsdstore.ru/img/cloudinit3.png)
+![](img/cloudinit3.png)
 
-![](https://www.bsdstore.ru/img/cloudinit4.png)
+![](img/cloudinit4.png)
 
 Further configuration and launch of a cloud-based virtual machine is no different from the main method. Good luck!

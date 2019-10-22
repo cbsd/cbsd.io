@@ -24,7 +24,7 @@ This is achieved through the configuration file blogin.conf and the parameter **
 
 The file can be placed for the individual environment in the directory `$workdir/jails-system/$jname/etc`, and globally, overwriting the value from `$workdir/etc/defaults/blogin.conf`. To do this, create a file with your configuration in the directory `$workdir/etc/`
 
-With a custom call, you can use [CBSD variables](https://www.bsdstore.ru/en/12.0.x/wf_cbsd_variables_ssi.html) - for this or that environment
+With a custom call, you can use [CBSD variables](../docs/cbsd-variables.md) - for this or that environment
 
 For example, if you want instead of the standard behavior, when the blogin launched the VNC client, the file `$workdir/etc/blogin.conf` can look like this:
 
@@ -38,7 +38,7 @@ If you want the ssh connection to occur, this file might look like this:
 login_cmd="/usr/bin/ssh your_user@${ipv4_first}"
 ```
 
-![](https://www.bsdstore.ru/img/blogin1.png)
+![](img/blogin1.png)
 
 
-![](https://www.bsdstore.ru/img/blogin2.png)
+![](img/blogin2.png)

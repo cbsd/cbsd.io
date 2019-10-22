@@ -31,8 +31,8 @@ Possible behaviors that you can remap for each code:
 * **preserve**: the domain will be terminated and its resource preserved to allow analysis (WIP, at the moment: XEN only)
 * **rename-restart**: the domain will be terminated and then restarted with a new name (WIP, at the moment: XEN only)
 
-![](https://www.bsdstore.ru/img/bhyve_exit_behavior1.png)
+![](img/bhyve_exit_behavior1.png)
 
-![](https://www.bsdstore.ru/img/bhyve_exit_behavior2.png)
+![](img/bhyve_exit_behavior2.png)
 
-![](https://www.bsdstore.ru/img/bhyve_exit_behavior3.png)
+![](img/bhyve_exit_behavior3.png)

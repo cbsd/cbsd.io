@@ -106,11 +106,11 @@ For example, to change ip of jail1:
 ```
 *cbsd jconfig jname=jail2*
 
-![](https://www.bsdstore.ru/img/jconfig1.png)
+![](img/jconfig1.png)
 
 *cbsd jset*
 
-![](https://www.bsdstore.ru/img/jconfig2.png)
+![](img/jconfig2.png)
 
 ## Custom scripts for starting and stopping action on jailI
 
@@ -137,8 +137,8 @@ You will receive notification upon startup cells by email: root@example.net
 
 The functionality of execution custom scripts and the availability of variables in environments can play a big role in the integration of CBSD and external applications, such as Consul
 
-As an example of use, see the article [Example of using CBSD/bhyve and ISC-DHCPD (Serve IP address in bhyve through pre/post hooks)](https://www.bsdstore.ru/en/articles/cbsd_vm_hook_dhcpd.html)
+As an example of use, see the article [Example of using CBSD/bhyve and ISC-DHCPD (Serve IP address in bhyve through pre/post hooks)](Virtual-Machine-Configuring.md)
 
-As an example of use, see the article [Example of using CBSD/jail and Consul (Register/unregister jail's via pre/post hooks, in Consul)](https://www.bsdstore.ru/en/articles/cbsd_jail_hook_consul.html)
+As an example of use, see the article [Example of using CBSD/jail and Consul (Register/unregister jail's via pre/post hooks, in Consul)](Virtual-Machine-Configuring.md)
 
 

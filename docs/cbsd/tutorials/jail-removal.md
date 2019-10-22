@@ -20,4 +20,4 @@ in a case when **jremove** executed for jail in status On, it will be automatica
 ```
 % cbsd jremove jail1
 ```
-![](https://www.bsdstore.ru/img/jremove1.png)
+![](img/jremove1.png)

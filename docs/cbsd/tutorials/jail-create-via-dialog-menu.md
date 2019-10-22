@@ -24,7 +24,7 @@ Please note: multi-repo and and the ability to choose a specific repository from
 
 **Use the features of profiles:**
 
-If you do not use automation (Puppet, Ansible, own implementation for generation of jconf) to create environments and you have to create a container with different parameters, use the ability to create your own [profile](https://www.bsdstore.ru/en/12.0.x/wf_profiles_ssi.html)to override the default values. You can override any parameter - the proposed template for jail name, version, binding to a specific interface instead of 'auto', etc..
+If you do not use automation (Puppet, Ansible, own implementation for generation of jconf) to create environments and you have to create a container with different parameters, use the ability to create your own [profile](profiles-for-jail-creation.md) to override the default values. You can override any parameter - the proposed template for jail name, version, binding to a specific interface instead of 'auto', etc..
 
 for creating config via dialog:
 
@@ -34,7 +34,7 @@ for creating config via dialog:
 
 The same menu is available to create a jail when configuring CBSD via bsdconfig
 
-![](https://www.bsdstore.ru/img/cbsd_syntax3.png)
+![](img/cbsd_syntax3.png)
 
 ```
 *** Let it not scare you a small ;-) the number of settings in jconstruct-tui - here are displayed only the most important options, suitable for most people. If you need a more flexible configuration - please use cbsd jconfig after jail creation
@@ -55,7 +55,7 @@ commands, or specify alternative path to jail-skel dir in .jconf (jcreate tools)
 
 You can override the `jailskeldir=$workdir/share/jail-skel`, parameters which is stored in `$workdir/etc/defaults/jail-freebsd-default.conf` to specify an alternate template directory, which will overwrite the files in the original base files when creating jail. To do this, create a file `jail-freebsd-XXXXX.conf` in `$workdir/etc` and enter the value.:
 
-See for details:[Profiles for jail creation](https://www.bsdstore.ru/en/12.0.x/wf_profiles_ssi.html)
+See for details: [Profiles for jail creation](profiles-for-jail-creation.md)
 
 ## DIALOG MENU OPTIONS
 
@@ -75,32 +75,32 @@ See for details:[Profiles for jail creation](https://www.bsdstore.ru/en/12.0.x/w
 *  arch - Specify architecture of jail environment
 *  vnet - Enable or disable VIMAGE feature
 
-![](https://www.bsdstore.ru/gif/jcreate.gif)
+![](gif/jcreate.gif)
 
 **Example** (fill for jname, fqdn, ips fields + GO):
 
 ```
 % cbsd jconstruct-tui
 ```
-![](https://www.bsdstore.ru/img/jcreate1.png)
+![](img/jcreate1.png)
 
 When repository configured properly, you can preset to new jail some packages. Use first character of name port for faster searching and hit space for mark it.
 
-![](https://www.bsdstore.ru/img/jcreate2.png)
+![](img/jcreate2.png)
 
 Required fields: a short (one word) the name of the jail. This name is used to identify the jail:
 
-![](https://www.bsdstore.ru/img/jcreate3.png)
+![](img/jcreate3.png)
 
 Required fields full (the domain) name of the cell. This name will be used as jail hostname:
 
-![](https://www.bsdstore.ru/img/jcreate4.png)
+![](img/jcreate4.png)
 
-Required fields: IP address of jail. May have a network prefix with a record like IP/prefix. To assign more than one IP address, use the editing of the file rc.conf jails described in [Jail config](https://www.bsdstore.ru/en/12.0.x/wf_jconfig_ssi.html)
+Required fields: IP address of jail. May have a network prefix with a record like IP/prefix. To assign more than one IP address, use the editing of the file rc.conf jails described in [Jail config](jail-cloning.md)
 
-![](https://www.bsdstore.ru/img/jcreate5.png)
+![](img/jcreate5.png)
 
 When you choose item **GO**, you are prompted to create the jail immediately by automatically running **cbsd jcreate jconf=...** Otherwise, you will be the path to the saved configuration to run **cbsd jcreate** by hand:
 
-![](https://www.bsdstore.ru/img/jcreate6.png)
+![](img/jcreate6.png)
 

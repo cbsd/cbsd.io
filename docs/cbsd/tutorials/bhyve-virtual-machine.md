@@ -21,11 +21,11 @@ To create a via DIALOG:
 
 The same menu is available to create a jail when configuring **CBSD** via bsdconfig
 
-![](https://www.bsdstore.ru/img/cbsd_syntax3.png)
+![](img/cbsd_syntax3.png)
 
 If **bconstruct-tui** worked correctly, at the end you will be asked to create a virtual machine. In the case of positive response, bcreate will be made to the new configuration automatically. Otherwise, script displays the path to the configuration file (in `$workdir/tmp`), on which you can create a VM.
 
-![](https://www.bsdstore.ru/gif/bcreate.gif)
+![](gif/bcreate.gif)
 
 ## Virtual Machine Profiles
 
@@ -133,29 +133,30 @@ Options and their brief description, which appear in the dialogue form. Dependin
 ```
 % cbsd bconstruct-tui
 ```
-![](https://www.bsdstore.ru/img/bcreate7.png)
+![](img/bcreate7.png)
 
 Guest OS type:
 
-![](https://www.bsdstore.ru/img/bcreate8.png)
+![](img/bcreate8.png)
 
 Choosing profile for Linux type guest:
 
-![](https://www.bsdstore.ru/img/bcreate9.png)
+![](img/bcreate9.png)
 
 Choosing VM name:
 
-![](https://www.bsdstore.ru/img/bcreate10.png)
+![](img/bcreate10.png)
 
 Choosing bhyve UEFI boot method:
 
-![](https://www.bsdstore.ru/img/bcreate11.png)
+![](img/bcreate11.png)
 
 Choosing bhyve VNC params:
 
 
-![](https://www.bsdstore.ru/img/bcreate12.png)
+![](img/bcreate12.png)
 
 Choosing bhyve params:
 
-![](https://www.bsdstore.ru/img/bcreate13.png)
+![](img/bcreate13.png)
+

@@ -46,12 +46,12 @@ to get and import kfreebsd jail:
 % cbsd repo action=get sources=img name=kfreebsd
 ```
 
-![](https://www.bsdstore.ru/img/repo1.png)
+![](img/repo1.png)
 
 Upon termination of an import the question of correct IP for a new jails will be asked and whether to create alias automatically. We choose COMMIT for preservation.
 
-![](https://www.bsdstore.ru/img/repo2.png)
+![](img/repo2.png)
 
 Now jail in system also it is possible to use
 
-![](https://www.bsdstore.ru/img/repo3.png)
+![](img/repo3.png)

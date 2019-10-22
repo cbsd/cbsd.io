@@ -36,7 +36,7 @@ If you created a container and the base files are missing, when you start CBSD a
 
 Thus, you control where and how files will be received, depending on your level of trust and security requirements
 
-  ![](https://www.bsdstore.ru/img/bases1.png)
+  ![](img/bases1.png)
 
 Described below are the steps needed to get the initial FreeBSD sources from the project's SVN repository [svn.freebsd.org](http://svn.freebsd.org), its compilation and installation in a separate directory which will act as base. These actions are necessary, if you don't want to use pre compiled versions available on [ftp://ftp.freebsd.org](ftp://ftp.freebsd.org) or [http://bsdstore.ru](http://bsdstore.ru), which can be retrieved with the **cbsd repo** command. Also, by manually building becomes possible to not only get releases, but also individual branches.
 
@@ -139,7 +139,7 @@ The next operation over building result (installworld), also should contain *bas
 
 **cbsd world** command is sequence for **cbsd buildworld && cbsd installworld**
 
-When you have the base in `${workdir}/basejail`,you can go to the [jail creation](https://www.bsdstore.ru/en/12.0.x/wf_jcreate_ssi.html).
+When you have the base in `${workdir}/basejail`,you can go to the [jail creation](../tutorials/jail-create-via-dialog-menu.md).
 
 
 ## Deleting the base

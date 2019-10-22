@@ -28,7 +28,7 @@ You will see the execution result on stdout, while the auxiliary messages are on
 % cbsd jexec jname='*' pkg clean -ya
 ```
 
-![](https://www.bsdstore.ru/img/jexec1.png)
+![](img/jexec1.png)
 
 Multiple command execution:
 

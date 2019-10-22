@@ -20,7 +20,7 @@ Floating file quotas are only possible for jails residing on **ZFS**-file system
 
 Renice example:
 
-1) Let's create an AMP jail and have it run a php script that performs some work (such as [bench.zip](https://www.bsdstore.ru/en/misc/bench.zip) taken from [php-benchmark-script](http://www.php-benchmark-script.com/)). We then clone the jail, calling the first **highprio1** and the second **lowprio1**. Using **cbsd jrctl-tui** we give the first the highest possible priority **-20**, and set the second jail to the lowest priority of **20**. In addition we limit the jail to one core through **cpuset** with **cbsd jconfig*** (single-core systems are hard to come by these days and smart schedulers do not allow for a clean experiment without taking this step ;-).
+1) Let's create an AMP jail and have it run a php script that performs some work (such as [bench.zip](files/bench.zip) taken from [php-benchmark-script](http://www.php-benchmark-script.com/)). We then clone the jail, calling the first **highprio1** and the second **lowprio1**. Using **cbsd jrctl-tui** we give the first the highest possible priority **-20**, and set the second jail to the lowest priority of **20**. In addition we limit the jail to one core through **cpuset** with **cbsd jconfig*** (single-core systems are hard to come by these days and smart schedulers do not allow for a clean experiment without taking this step ;-).
 
 ```
 % cbsd jls display=jid,jname,ip4_addr,cpuset
@@ -159,7 +159,7 @@ a) All you can do a framework FreeBSD [rctl(8)](http://man.freebsd.org/rctl/8):
 |	shmsize 	|   SysV shared memory size, in bytes |
 |	wallclock	|   wallclock time, in seconds |
 
-![](https://www.bsdstore.ru/img/jrctl1.png)
+![](img/jrctl1.png)
 
-![](https://www.bsdstore.ru/img/jrctl2.png)
+![](img/jrctl2.png)
 

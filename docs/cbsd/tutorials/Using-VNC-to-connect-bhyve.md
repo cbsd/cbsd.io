@@ -15,7 +15,7 @@ To do this, when you create a new virtual machine (or editing through bconfig), 
 
 value of **vm_efi** set to **uefi**:
 
-![](https://www.bsdstore.ru/img/bcreate11.png)
+![](img/bcreate11.png)
 
 
 f you want to fixate the VNC port, use the menu item **vm_vnc_port**
@@ -43,6 +43,6 @@ To connect to the VNC on a remote server, please use SSH tunnels, or any proxies
 
 If you want to work with VNC directly, just change the parameter **bhyve_vnc_tcp_bind** from 127.0.0.1 to 0.0.0.0 via **vnc_options** menu. In this case, to connect the port to be opened all
 
-![](https://www.bsdstore.ru/img/bcreate12.png)
+![](img/bcreate12.png)
 
 
