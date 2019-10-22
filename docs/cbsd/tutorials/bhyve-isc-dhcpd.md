@@ -2,24 +2,24 @@
 
 ## Example of using CBSD/bhyve and ISC-DHCPD
 
-This article demonstrates some uses CBSD master/pre/post to integrate the CBSD with external services.
+This article demonstrates some uses **CBSD master/pre/post** to integrate the CBSD with external services.
 
 If you read the description of the functional master/pre/post hooks, then this feature allows you to embed the execution of custom scripts in different Stage of life of the virtual environment. At the same time, in these scripts, the values of variables of this environment are available, so you can identify Events with a specific environment and/or use these parameters for some of their purposes.
 
 One of the tasks that you need to solve when working with virtual environments is to manage the network settings inside the virtual machine.
 
-This is not very difficult if you have your own virtual environment image, in which you can embed your own scripts (for example, so works vm_obtain method in ClonOS), or work with a virtual machine through the virtio-console. But this method is not suitable if:
+This is not very difficult if you have your own virtual environment image, in which you can embed your own scripts (for example, so works vm_obtain method in [ClonOS](https://clonos.tekroutine.com/)), or work with a virtual machine through the virtio-console. But this method is not suitable if:
 
 * You install the virtual machine from scratch using the ISO image obtained from the developer site;
 * You use a large number of completely different distributions, each with its own method of initializing network settings;
 
-In this case, the most universal method, suitable for any OS, is the use of the standard protocol for initializing network settings DHCP.
+In this case, the most universal method, suitable for any OS, is the use of the standard protocol for initializing network settings [DHCP](https://en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol).
 
-Let's try, with the example of this task, to show how you can use the master/pre/post hook function when working with virtual environments, using isc-dhcpd in conjunction with CBSD for control IP address in bhyve.
+Let's try, with the example of this task, to show how you can use the master/pre/post hook function when working with virtual environments, using **isc-dhcpd** in conjunction with CBSD for control IP address in bhyve.
 
-Instead of isc-dhcpd, any other DHCP server can be used, for example DNSMasq, workflow will be approximately the same:
+Instead of isc-dhcpd, any other DHCP server can be used, for example [DNSMasq](http://www.thekelleys.org.uk/dnsmasq/doc.html), workflow will be approximately the same:
 
-DHCPD server allows you to configure the network subnet. In addition, you can fix pairs MAC address and IP. In other words, knowing a particular MAC address, you configure the DHCPD server to give it a fixed, predefined IP address.
+**DHCPD** server allows you to configure the network subnet. In addition, you can fix pairs MAC address and IP. In other words, knowing a particular MAC address, you configure the DHCPD server to give it a fixed, predefined IP address.
 
 CBSD knows MAC addresses, So our goal is somewhere in the container launch phase, configure DHCP to issue an IP address that we'll point to CBSD for the MAC address that the virtual environment will give out (or we'll assign) to it.
 
@@ -29,7 +29,7 @@ Schematically, the flowchart should work for you about this:
 
 We assume that CBSD already installed and configured, and its version is not lower than 11.0.10
 
-1) Install isd-dhcpd package via pkg:
+1) Install isd-dhcpd package via [pkg](http://man.freebsd.org/pkg/8):
 
 ```
 % pkg install net/isc-dhcp44-server
@@ -131,7 +131,7 @@ Another method of solving - you can specify dhcpd to work only on those (tapX) i
 
 Well. All elements are ready, it remains only to connect them.
 
-We will need master_prestart hook, because we need to perform the actions on the host system and at the moment preceding directly launching the virtual machine. It is master_prestart.d directory in system personal catalog for VM: $workdir/jail-system/$jname
+We will need master_prestart hook, because we need to perform the actions on the host system and at the moment preceding directly launching the virtual machine. It is **master_prestart.d** directory in system personal catalog for VM: $workdir/jail-system/$jname
 
 where:
 
@@ -155,7 +155,7 @@ Copy the standard directory tree from the distribution CBSD, it does not contain
 % cp -a ~cbsd/share/jail-system-default /root/share
 ```
 
-Perhaps, the script that adds records to dhcpd.conf is quite versatile and we do not need to copy it to each created environment. We will dispense with symbolic links that will point to it. To do this, go to the master_prestart.d directory, template and specify ln to the source script:
+Perhaps, the script that adds records to dhcpd.conf is quite versatile and we do not need to copy it to each created environment. We will dispense with symbolic links that will point to it. To do this, go to the **master_prestart.d** directory, template and specify [ln](http://man.freebsd.org/pkg/1)to the source script:
 
 ```
 % cd /root/share/jail-system-default/master_prestart.d
@@ -167,9 +167,9 @@ And will reassign the path to the skel-directory to our copy, through the config
 echo 'systemskeldir="/root/share/jail-system-default"' > ~cbsd/etc/bhyve-default-default.conf
 ```
 
-That's all! We can only run cbsd bconstruct-tui and to stamp virtual machines with the specified IP addresses in the configuration ip4_addr.
+That's all! We can only run [cbsd bconstruct-tui](bhyve-virtual-machine.md) and to stamp virtual machines with the specified IP addresses in the configuration ip4_addr.
 
-Please note that on the interface where you start DHCPD (in our case it's the em0 interface, you must have at least one IP address from the subnet that is distributed through DHCPD
+Please note that on the interface where you start **DHCPD** (in our case it's the em0 interface, you must have at least one IP address from the subnet that is distributed through DHCPD
 
 Since in our case the default gateway is this server, we simply assigned the 192.168.0.1 address as an alias to em0.
 
