@@ -1,0 +1,3 @@
+docs/cbsd/docs/cbsd-web.md:The developers are very interested in feedback by those using **ClonOS**. The more testing, and feedback provided, the quicker **ClonOS** will make it into the ports tree. Please click [here](https://www.bsdstore.ru/en/feedback.html) for more information on submitting feedback.
+docs/cbsd/docs/freebsd-bhyve.md:read for [CBSD/bhyve](https://www.bsdstore.ru/en/articles/cbsd_vm_hook_dhcpd.html)
+docs/cbsd/docs/cbsd-rcconf.md:System commands for starts and stops jail. If you want to write additional scripts executed by starting and stopping jails see: [Jail config](https://www.bsdstore.ru/en/12.0.x/wf_jconfig_ssi.html#execscript)

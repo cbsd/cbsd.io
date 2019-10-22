@@ -60,7 +60,7 @@ In such cases, you need to update the checksums in the profiles and update the i
 
   If you are at your own risk and want to take an ISO image, despite the discrepancy between the amounts of CRC, you have two options:
 
-*  Adjust the **sha256sum** value in a particular profile by setting **sha256sum=0**. When **sha256sum=0**, this causes  to skip the CRC check. Refer to the section [**CBSD** profiles](https://www.bsdstore.ru/en/12.0.x/wf_profiles_ssi.html) for details on how to overwrite certain parameters.
+*  Adjust the **sha256sum** value in a particular profile by setting **sha256sum=0**. When **sha256sum=0**, this causes  to skip the CRC check. Refer to the section [**CBSD** profiles](../tutorials/profiles-for-jail-creation.md) for details on how to overwrite certain parameters.
 
 * Prevent CRC checksums globally through the **BSD_ISO_SKIP_CHECKSUM=[yes|no]** environment variable (or configuration file), for example:` env CBSD_ISO_SKIP_CHECKSUM=yes cbsd bstart`
 

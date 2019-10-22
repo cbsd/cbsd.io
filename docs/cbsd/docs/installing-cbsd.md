@@ -1,6 +1,6 @@
 # Installing CBSD
 
-**CBSD** — is a collection of tools simplifying the work with jails scripts, which will work on any hardware that runs FreeBSD. This guide assumes that you are installing CBSD on a freshly installed FreeBSD system as a number of configuration files [can be changed during install](https://www.bsdstore.ru/en/custom_freecbsd.html).
+**CBSD** — is a collection of tools simplifying the work with jails scripts, which will work on any hardware that runs FreeBSD. This guide assumes that you are installing CBSD on a freshly installed FreeBSD system as a number of configuration files [can be changed during install](cbsd-geli.md).
 
 
 For full functionality the following requirements are desirable:

@@ -2,7 +2,7 @@
 
 **Description:**
 
-**CBSD** is written taking into account the extensibility and flexibility, giving system engineers the opportunity to increase the functionality of the framework through modules or integration with various other tools through hooks available at various stages of script execution, such as such as [pre/post start/stop](https://www.bsdstore.ru/en/12.0.x/wf_jconfig_ssi.html#execscript) hooks or customization of blogin/jlogin command.
+**CBSD** is written taking into account the extensibility and flexibility, giving system engineers the opportunity to increase the functionality of the framework through modules or integration with various other tools through hooks available at various stages of script execution, such as such as [pre/post start/stop](../tutorials/jail-config.md) hooks or customization of blogin/jlogin command.
 
 Here is a list of reserved variables participating in these stages and available for use:
 

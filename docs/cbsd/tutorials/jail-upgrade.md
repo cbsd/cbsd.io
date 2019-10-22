@@ -115,7 +115,7 @@ There are cases when you need to upgrade the files in one version, for example, 
 % cbsd repo action=get sources=base mode=upgrade
 ```
 
-- flags **mode=upgrade** permits to **CBSD** overwrite this directory with new files, if you already have a version of the base for this version. Or, you can build a more recent version of the base, using [Building and upgrading bases](building-upgrading-bases.md) Also, you can go with the base version with a RELEASE to STABLE (in this case, the name of the base directory will not X.Y, just X. Ie, instead base_\*_\*_9.2 will be used base_\*_\*_9 directory. For this you need in configurator of jail (cbsd jconfig) change the parameter stable=0 to stable=1 (either through cbsd initenv-tui mode is set STABLE branches globally), and do not forget to add stable=1 flags in repo command (if not set globally)
+- flags **mode=upgrade** permits to **CBSD** overwrite this directory with new files, if you already have a version of the base for this version. Or, you can build a more recent version of the base, using [Building and upgrading bases](../docs/building-upgrading-bases.md) Also, you can go with the base version with a RELEASE to STABLE (in this case, the name of the base directory will not X.Y, just X. Ie, instead base_\*_\*_9.2 will be used base_\*_\*_9 directory. For this you need in configurator of jail (cbsd jconfig) change the parameter stable=0 to stable=1 (either through cbsd initenv-tui mode is set STABLE branches globally), and do not forget to add stable=1 flags in repo command (if not set globally)
 
 ```
 % cbsd repo action=get sources=base mode=upgrade stable=1

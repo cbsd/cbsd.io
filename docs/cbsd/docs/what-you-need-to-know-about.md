@@ -70,8 +70,8 @@ For example: There may be configurator's services, files with the description of
 Internal information for CBSD is stored in the `$workdir/db` directory.
 For example: The information on the list of added nodes, inventory of both the local and remote nodes, and so on.
 
-One important thing to note in regards to security are the directories `${workdir}/.rssh` and `${workdir}/.ssh`. These dirs contain the private RSA keys for the remote user CBSD nodes (.rssh) and the local nodes(.ssh). Make sure that the data in these directories are not available to other users of the system. For more information, please see the article about [GELI](https://www.bsdstore.ru/en/cbsd_geli.html) encryption. By default, the key can be read only by a system CBSD user.
-Finally, be sure to read about the modifications that CBSD does to the system. This [page](https://www.bsdstore.ru/en/custom_freecbsd.html) describes all of the modifications that are carried out by CBSD scripts after installing on a FreeBSD system.
+One important thing to note in regards to security are the directories `${workdir}/.rssh` and `${workdir}/.ssh`. These dirs contain the private RSA keys for the remote user CBSD nodes (.rssh) and the local nodes(.ssh). Make sure that the data in these directories are not available to other users of the system. For more information, please see the article about [GELI](cbsd-geli.md) encryption. By default, the key can be read only by a system CBSD user.
+Finally, be sure to read about the modifications that CBSD does to the system. This [page](modification-cbsd-scrips.md) describes all of the modifications that are carried out by CBSD scripts after installing on a FreeBSD system.
 
 ### Multiple operation by jname as mask
 
@@ -116,7 +116,7 @@ cbsd jstart jname='lala*'
 
 **CBSD** uses the count ruleset of **[ipfw](https://www.freebsd.org/doc/en/books/handbook/firewalls-ipfw.html)** filter to count jail traffic. **CBSD** sets the number of counters in the **99 — 2000** range. The range can be easily adjusted in cbsd.conf if this interfes with existing rules. Be mindful when changing firewall rules. **CBSD** "takes ownership" of the rules in the range given. In otherwords, if there are other rules already in place using the specified range, there is the posibility that **CBSD** could delete and re-add the rules in the range. This means all rules in the range would be deleted, but only the CBSD rules would be added back in.
 
-Read more about [counting jail traffic](a-few-words-about-jail-traffic-counting.md).
+Read more about [counting jail traffic](../tutorials/a-few-words-about-jail-traffic-counting.md).
 
 
 ### Expose: tcp/udp port forwarding from master host to jail
@@ -124,7 +124,7 @@ Read more about [counting jail traffic](a-few-words-about-jail-traffic-counting.
 
 **CBSD** uses the **fwd** ruleset of **ipfw** to configure port forwarding. **CBSD** sets the number of counters in the **2001 - 2999** range. This range can easily be changed in cbsd.conf if need be. Again, always be mindful when changing firewall rules. Make sure no rules conflict with the range configrured for **CBSD** to use.
 
-Read more about [expose](port-forwarding-for-jail.md).
+Read more about [expose](../tutorials/port-forwarding-for-jail.md).
 
 ### About rsync-based copying jail data between nodes
 
@@ -152,7 +152,7 @@ will disable the use of color in the output of the names of the jails.
 
 
 ### If something went wrong
-While the **CBSD** project strives to be bug free, like any software, bugs happen. If a component or tool that is part of **CBSD** crashes, or returns unexpected data or behaviour, [**CBSD** command debuging](https://www.bsdstore.ru/en/cmdsyntax_cbsd.html#cmddebug) can be enabled. If the bug is reproducible, and an actaul bug discovered, please report the issue via e-mail: **CBSD @**(at) **bsdstore.ru**, or better yet submit a pull request that identifies the issue found, and contains the code to resolve the issue.
+While the **CBSD** project strives to be bug free, like any software, bugs happen. If a component or tool that is part of **CBSD** crashes, or returns unexpected data or behaviour, can be enabled. If the bug is reproducible, and an actaul bug discovered, please report the issue via e-mail: **CBSD @**(at) **bsdstore.ru**, or better yet submit a pull request that identifies the issue found, and contains the code to resolve the issue.
 
 #### Taking backups of CBSD virtual environment.
 

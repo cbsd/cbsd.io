@@ -139,7 +139,7 @@ The next operation over building result (installworld), also should contain *bas
 
 **cbsd world** command is sequence for **cbsd buildworld && cbsd installworld**
 
-When you have the base in `${workdir}/basejail`,you can go to the [jail creation](https://www.bsdstore.ru/en/12.0.x/wf_jcreate_ssi.html).
+When you have the base in `${workdir}/basejail`,you can go to the [jail creation](../tutorials/jail-create-via-dialog-menu.md).
 
 
 ## Deleting the base
