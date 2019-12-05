@@ -43,6 +43,7 @@ For example, to run the configuration tool for the jail1, run:
 ```
 % cbsd jconfig jname=jail1
 ```
+There is a special value for `ip4_addr` when used with vnet: `REALDHCP`. When it's used, CBSD will run `dhclient interface` before starting the jail. It's intended for setups where DHCP server is used wither on the host where CBSD is, or on the router of the local network.
 
 ## Mounting File Systems in jail
 
