@@ -3,7 +3,7 @@
 
 CBSD is an additional layer of abstraction for the [jail(8)](https://www.freebsd.org/cgi/man.cgi?query=jail&sektion=8) framework, and provides additional functionality not currently available in FreeBSD.
 
-The additional functionality CBSD provides uses the following;
+The additional functionality CBSD provides uses the following:
 
    * [vnet (VIMAGE)](https://www.freebsd.org/cgi/man.cgi?query=vnet&sektion=9)
    * [zfs](https://www.freebsd.org/doc/handbook/zfs.html)
@@ -13,12 +13,12 @@ The additional functionality CBSD provides uses the following;
    * [hastd](https://www.freebsd.org/cgi/man.cgi?query=hastd&sektion=8)
    * [bhyve](https://www.freebsd.org/doc/handbook/virtualization-host-bhyve.html)
 
-While many of these subsystems are not directly related to jails, CBSD uses these components to provide system administrators a more advanced, integrated system in which to implement solutions for issues faced in today's envirnonment.
-This page will provide information to help system administrators familiarize themselves with CBSD. While this page is not intended to be a comprehensive, all encompassing how-to, it will provide details about where files are stored, and how to use CBSD to manage and interact with the virtual environment.
+While many of these subsystems are not directly related to jails, CBSD uses these components to provide system administrators a more advanced, integrated system in which to implement solutions for modern issues encountered in today's systems.
+This page will provide information to help system administrators familiarize themselves with CBSD. While this page is not intended to be a comprehensive all encompassing how-to, it will provide details about where files are stored and how to use CBSD to manage and interact with the virtual environment.
 
 The information provided here assumes a basic understanding of jails, how they are used, and how they are managed in FreeBSD. The official documentation about jails is a highly recommended starting point, and can be found in Chapter 14 of the FreeBSD Handbook: [Jails](https://www.freebsd.org/doc/en_US.ISO8859-1/books/handbook/jails.html). The [jail(8)](https://www.freebsd.org/cgi/man.cgi?query=jail&sektion=8) manpage is also a great resource.
 
-Before getting started, be aware of the following terminology, and how it will be used;
+Before getting started, be aware of the following terminology, and how it will be used:
 
    + **Node**: A physical server that hosts the virtual environment.
    + **Jail**: An isolated environment, complete with its own set of software and services. A jail is able to run any software that is available to the OS installed in the jail (cli or graphical).
@@ -28,7 +28,12 @@ Before getting started, be aware of the following terminology, and how it will b
    + **$workdir**: The working directory on a CBSD node that is initialized via the cbsd initenv command on the initial run. This directory is /usr/jails unless otherwise specified.
    + **$jname**: The name of a jail in the CBSD environment.
 
-A quick word about jails. As stated, most any software available to the OS the jail runs can be ran inside of a jail. Server-side components such as DNS, Apache/nginx, or postfix, can run isolated from the host. Perhaps lesser known is graphical environments/applications can also run inside a jail isolated from the host. For example, run an XServer or VNCServer, then connect to it. A single application can be run from inside a jail, and then connected to using Xforwarding. `firefox -display=REMOTEADDR:PORT` There is also xjails, Xorg running inside a jail isolated from the host.
+###A quick word about jails. 
+As stated, almost any software available to the OS that runs the jail can be ran inside of a jail. Server-side components such as DNS, Apache/nginx, or postfix, can run isolated from the host. Perhaps lesser known is hat graphical environments/applications can also run inside a jail isolated from the host. For example, run an XServer or VNCServer, then connect to it. A single application can be run from inside a jail, and then connected to using Xforwarding. `firefox -display=REMOTEADDR:PORT` There is also xjails, Xorg running inside a jail isolated from the host.
+
+###Structure
+
+CBSD uses the standard directories specified by jail(8). This allows jails to migrated to or from any other jail management system that also follows the standards set by jail. The goal for the directories where jails are stored is to be consistent, and adhere to the jail standards. This allows for the greatest compatibility.
 
 The largest directory used by CBSD is where all of the data CBSD uses is stored. This is the directory `$workdir`, and is a symlink to `/usr/jails`by default. This directory can be changed when necessary. `$workdir` is also the CBSD user's home directory. To quickly enter this dir from any other path, pass `~cbsd` to the cd command.
 ```
@@ -42,8 +47,6 @@ There are two main directories used to store jail data. The deciding factor for 
 To create a jail with a readonly base, pass the flag `baserw=0`. Instead of writing to the base, the new jail will use the standard base from `$workdir/basejail/$basename`. Jails with a read only base are stored in the directory `$workdir/jails/$jname`. Any `baserw=0` jail will mount the `$basename `through nullfs. This allows for the easy upgrade of all `baserw=0 `jails, as upgrading the `$basename `jail upgrades all of the jails using it. Another advantage is the fact that if a read only jail is compromised, the attacker will be unable to modify anything in base as it is read only.
 
 `baserw=1`; When a new jail is created with the flag ` baserw=1`, the jail will have the ability to write to it's own base. Jails with this ability store data in the directory `$workdir/jails-data/$jname`.
-
-CBSD uses the standard directories specified by jail(8). This allows jails to migrated to or from any other jail management system that also follows the standards set by jail. The goal for the directories where jails are stored is to be consistent, and adhere to the jail standards. This allows for the greatest compatibility.
 
 Note: When using the jail type md, the directory `$workdir/jails-data/$jname`will contain the image of the jail.
 
