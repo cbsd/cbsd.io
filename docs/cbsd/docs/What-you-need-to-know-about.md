@@ -28,10 +28,10 @@ Before getting started, be aware of the following terminology, and how it will b
    + **$workdir**: The working directory on a CBSD node that is initialized via the cbsd initenv command on the initial run. This directory is /usr/jails unless otherwise specified.
    + **$jname**: The name of a jail in the CBSD environment.
 
-###A quick word about jails. 
+### A quick word about jails. 
 As stated, almost any software available to the OS that runs the jail can be ran inside of a jail. Server-side components such as DNS, Apache/nginx, or postfix, can run isolated from the host. Perhaps lesser known is hat graphical environments/applications can also run inside a jail isolated from the host. For example, run an XServer or VNCServer, then connect to it. A single application can be run from inside a jail, and then connected to using Xforwarding. `firefox -display=REMOTEADDR:PORT` There is also xjails, Xorg running inside a jail isolated from the host.
 
-###Structure
+### Structure
 
 CBSD uses the standard directories specified by jail(8). This allows jails to migrated to or from any other jail management system that also follows the standards set by jail. The goal for the directories where jails are stored is to be consistent, and adhere to the jail standards. This allows for the greatest compatibility.
 
