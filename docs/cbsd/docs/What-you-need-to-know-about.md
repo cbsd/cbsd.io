@@ -44,7 +44,7 @@ There are two main directories used to store jail data. The deciding factor for 
 
  `baserw=0;`
 
-To create a jail with a readonly base, pass the flag `baserw=0`. Instead of writing to the base, the new jail will use the standard base from `$workdir/basejail/$basename`. Jails with a read only base are stored in the directory `$workdir/jails/$jname`. Any `baserw=0` jail will mount the `$basename `through nullfs. This allows for the easy upgrade of all `baserw=0 `jails, as upgrading the `$basename `jail upgrades all of the jails using it. Another advantage is the fact that if a read only jail is compromised, the attacker will be unable to modify anything in base as it is read only.
+To create a jail with a read-only base, pass the flag `baserw=0`. Instead of writing to the base, the new jail will use the standard base from `$workdir/basejail/$basename`. Jails with a read-only base are stored in the directory `$workdir/jails/$jname`. Any `baserw=0` jail will mount the `$basename `through nullfs. This allows for the easy upgrade of all `baserw=0 `jails, as upgrading the `$basename `jail upgrades all of the jails using it. Another advantage is the fact that if a read-only jail is compromised, the attacker will be unable to modify anything in base as it is read-only.
 
 `baserw=1`; When a new jail is created with the flag ` baserw=1`, the jail will have the ability to write to it's own base. Jails with this ability store data in the directory `$workdir/jails-data/$jname`.
 
@@ -61,7 +61,7 @@ To access the data use;
 % zfs mount $jname_file_system
 ```
 
-The second-largest directory in the CBSD hierarchy is `$workdir/var/db/`. This directory is where the configuration files for all of the jails created are stored. All jail settings are stored in the jails table in an SQLite3 database. The symbolic link `${workdir}/var/db/local.sqlite should` always point to the correct/ current database. The table schema is described in the file `${workdir}/share/local-jails.schema`. SQLite3 can be used to query information about all jails on a node.
+The second-largest directory in the CBSD hierarchy is `$workdir/var/db/`. This directory is where the configuration files for all of the jails created are stored. All jail settings are stored in the jails table in an SQLite3 database. The symbolic link `${workdir}/var/db/local.sqlite should` always points to the correct/current database. The table schema is described in the file `${workdir}/share/local-jails.schema`. SQLite3 can be used to query information about all jails on a node.
 For example, to see all jails on the node, and their IP address' execute;
 
 ```
@@ -95,13 +95,13 @@ cbsd jstart jname='lala*'
 
 ![exammple](https://www.bsdstore.ru/gif/jnamemask.gif)
 
-### A brief summary of the filesystem hierarchy CBSD
+### A brief summary of the filesystem hierarchy in CBSD
 
 | Option | Description |
 |:------| :-----------|
 |${workdir}/.rssh/| This directory stores the private keys of remote nodes. The files are added and removed via the command **cbsd node**|
-|${workdir}/.ssh | This directory stores the private and public keys of the nodes. The directory is created during initialization with the command cbsd initenv. This is also where the public key comes from when the command **cbsd node mode=add** is issued to copy the pub key to a remote host. The Key file name is the md5 sum of the nodename. |
-|${workdir}/basejail | This directory is used to store the bases and kernels for FreeBSD that are used when creating **baserw=0** jails. These are generated via cbsd buildworld/buildkernel, cbsd installworld/installkernel, or cbsd repo action=get sources=base/kernel) |
+|${workdir}/.ssh | This directory stores the private and public keys of the nodes. The directory is created during initialization with the command **cbsd initenv**. This is also where the public key comes from when the command **cbsd node mode=add** is issued to copy the public key to a remote host. The Key file name is the md5 sum of the nodename. |
+|${workdir}/basejail | This directory is used to store the bases and kernels for FreeBSD that are used when creating **baserw=0** jails. These are generated via cbsd buildworld/buildkernel, cbsd installworld/installkernel, or cbsd repo action=get sources=base/kernel |
 |${workdir}/etc | Configuration files needed to run **CBSD**|
 |${workdir}/export| The default directory that will be stored in a file exported by the jail (a cbsd jexport jname=$jname, this directory will file $jname.img)|
 |${workdir}/import| The default directory containing data to be imported to a jail (a cbsd jimport jname=$jname, will be deployed jail $jname)|
@@ -129,11 +129,11 @@ Read more about [counting jail traffic](https://www.bsdstore.ru/en/12.0.x/wf_jai
 
 Read more about [expose](https://www.bsdstore.ru/en/12.0.x/wf_expose_ssi.html).
 
+
 ### About rsync-based copying jail data between nodes
 
 
-
-**CBSD** offers a wrapper to rsync called cbsdrsyncd. If **cbsdrsyncd** is activated, please keep in mind that there is the standard **rsyncd(1)** daemon running that looks at the specified *$jail-data* directory, and is protected by the rsync password. **CBSD** generates a strong password via the following command;
+**CBSD** offers a wrapper to rsync called cbsdrsyncd. If **cbsdrsyncd** is activated, please keep in mind that there is a standard **rsyncd(1)** daemon running that looks at the specified *$jail-data* directory, and is protected by the rsync password. **CBSD** generates a strong password via the following command;
 
 ```
 head -c 30 /dev/random | uuencode -m - | tail -n 2 | head -n1
@@ -154,8 +154,13 @@ For example, issuing the command;
 will disable the use of color in the output of the names of the jails.
 
 
-### If something went wrong
-While the **CBSD** project strives to be bug free, like any software, bugs happen. If a component or tool that is part of **CBSD** crashes, or returns unexpected data or behaviour, [**CBSD** command debuging](https://www.bsdstore.ru/en/cmdsyntax_cbsd.html#cmddebug) can be enabled. If the bug is reproducible, and an actaul bug discovered, please report the issue via e-mail: **CBSD @**(at) **bsdstore.ru**, or better yet submit a pull request that identifies the issue found, and contains the code to resolve the issue.
+
+
+
+
+### If something went wrong...
+
+While the **CBSD** project strives to be bug free, like in any other software bugs can happen. If a component or tool that is part of **CBSD** crashes, or returns unexpected data or behaviour, a debuging command can be enabled: [**CBSD** command debuging](https://www.bsdstore.ru/en/cmdsyntax_cbsd.html#cmddebug). If the bug is reproducible, and an actaul bug discovered, please report the issue via e-mail: **CBSD @**(at) **bsdstore.ru**, or better yet submit a pull request that identifies the issue found, and contains the code to resolve the issue.
 
 #### Taking backups of CBSD virtual environment.
 
