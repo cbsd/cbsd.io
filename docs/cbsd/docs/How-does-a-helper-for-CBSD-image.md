@@ -8,15 +8,13 @@
 
 ** Description:**
 
-Prebuilt images for **CBSD** represent a archive of environment and a sequence scenario, which will be formed by one or another configuration derived from the image of the environment
+Prebuilt images for **CBSD** represent an archive of environment and a sequence scenario, formed by one of the configurations derived from the state of the environment.
 
-Since most of the modifications associated with personal data (passwords, user names or domain name databases, etc.), to mining scenario must be received all necessary parameters
+Since most of the modifications associated with personal data (passwords, user names or domain name databases, etc.), to mining scenario must be received all necessary parameters - sta je ovde pisac hteo da kaze? da budemo sigurni da mu trebaju svi parametri? Starting with version **CBSD** 10.1.0, entering the settings dialog executes the script imghelper, which takes parameters for construction of the SQLite3 database that runs along with the jail
 
-Starting with version **CBSD** 10.1.0, enter the settings dialog executes the script imghelper, which takes parameters for the construction of forms of SQLite3 database that runs along with the jail
+Here we will analyze the construction of the classical dialog-based menu.
 
-In this paper we consider the construction of the classical dialog-based menu
-
-SQL schema file format, the following (described format is used for testing CBSD updatesql:
+In SQL schema file format, the following described format is used for testing CBSD updatesql:
 
 ```
 CREATE TABLE forms (  idx INTEGER PRIMARY KEY AUTOINCREMENT, param TEXT DEFAULT NULL UNIQUE, \
@@ -40,7 +38,7 @@ For example, for wordpress from CBSD repo generation base occurs so: [initforms.
 
 When cbsd imghelper executed specifies the path to the file (in the preparation of image through cbsd repo, the operation is done automatically).
 
-There are three ways to enter the required parameters **cbsd imghelper** before it will run the installation script:
+There are three ways to enter the required parameters for **cbsd imghelper** before it will run the installation script:
 
 * Interactive mode: used to draw the dialog UI, parameters and input fields. By filling that button "COMMIT" initializes the install script
 * Interactive and non-interactive, Method 1: Specify the parameters in the command line: cbsd imghelper param1 = val1 param2 = "this is arg for param2" ... In this case, if all the fields have values, the script will run automatically
