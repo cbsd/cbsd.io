@@ -1,7 +1,7 @@
 # What you need to know about CBSD
 ### General information
 
-CBSD is an additional layer of abstraction for the [jail(8)](https://www.freebsd.org/cgi/man.cgi?query=jail&sektion=8) framework, and provides additional functionality not currently available in FreeBSD.
+CBSD is an additional layer of abstraction for the [jail(8)](https://www.freebsd.org/cgi/man.cgi?query=jail&sektion=8) framework, and provides additional functionality not currently available in FreeBSD. It is collection of tools simplifying the work with jails scripts, and will work on any hardware that runs FreeBSD.
 
 The additional functionality CBSD provides uses the following:
 
