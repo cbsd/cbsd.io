@@ -1,3 +1,5 @@
 site_name: CBSD
 theme:
   name: material
+markdown_extensions:
+  - admonition
