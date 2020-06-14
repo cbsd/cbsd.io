@@ -4,3 +4,6 @@ theme:
 markdown_extensions:
   - admonition
   - codehilite
+plugins:
+  - search
+  - awesome-pages
