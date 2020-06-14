@@ -1,4 +1,6 @@
- Encrypting images with  cbsd geli
+# CBSD geli
+
+## Encrypting images with CBSD geli
 
 There are situations where the information posted on the server's hard drive should preferably be stored in encrypted form. For example, you are setting up a server with important information in any foreign datacenter . There are real cases (author familiar with the case not by hearsay ) when disgruntled employees datacenter can take a few minutes to turn off your server , under any pretext ( breaks technical work — not uncommon) , make an image of the hard drive and turn back , that you will look like rebooting the server , while all the information is from third parties became individuals. Either you rent VDS / VPS, where a stranger to you, not only the data center , but also the server and media.
 
