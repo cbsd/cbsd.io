@@ -64,6 +64,7 @@ You may prefer two other switching options available in **CBSD**:
 * You can exclude the bridge and use a point-to-point connection. To do this, through 'cbsd bconfig' &rarr; bhyvenic &rarr; nic1, you need to change the **nic_parent** parameter to **disable**. In this mode, you must assign an IP address as the gateway to your virtual machine on the tap interface.
 
 !!! warning
+
     Note the presence of a menu for selecting the bhyve IP address in the bconstruct-tui menu.
 
     Keep in mind that without auxiliary scripts inside the distribution or virtual machine, you can not manage the settings in the virtual machine itself from the outside.

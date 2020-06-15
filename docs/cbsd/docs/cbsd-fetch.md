@@ -1,4 +1,4 @@
-#CBSD Fetch
+# CBSD fetch
 
 ## Description
 
