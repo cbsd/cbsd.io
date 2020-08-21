@@ -1,6 +1,6 @@
 # Welcome to CBSD
 
-<i>If you're tired of manually typing hundreds of commands just to organize a virtual system? May we recommend CBSD instead</i>
+<i>Are you tired of manually typing hundreds of commands just to organize a virtual system? May we recommend CBSD instead</i>
 
 
 CBSD is a software project intended as a management layer for the FreeBSD Jail subsystem, written to utilize jail(8), bhyve and Xen. 
