@@ -10,7 +10,7 @@ Almost all **CloneOS** code is written in **sh** for the following reasons:
 
 Nevertheless, **sh** comes with many restrictions (mainly when working with lines) which make writing scripts difficult. To alleviate this **CloneOS** comes with its own fork of /bin/sh which brings the additional functionality described in this document
 
-So if you want to change/add somethin in **CloneOS** or its modules, you have enough knowledge on the usual sh and extend several function.
+So if you want to change/add something in **CloneOS** or its modules, you have enough knowledge on the usual **sh** and extend several function.
 
 ## cbsdsh
 
