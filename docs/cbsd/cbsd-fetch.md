@@ -108,7 +108,7 @@ touch /var/log/cbsd_mirror.log
 chown -R www:www /usr/local/www/cbsd-mirror /var/log/cbsd_mirror.log
 ```
 
-4) Correct **nginx.confi**, specifying **server_name** as correct name of the server (in this example: **electrode.bsdstore.ru**) and set path to root directory:
+4) Correct **nginx.conf**, specifying **server_name** as correct name of the server (in this example: **electrode.bsdstore.ru**) and set path to root directory:
 
 
 ```
