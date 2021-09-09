@@ -22,7 +22,7 @@
 | bhyve-p9shares        |Manage bhyve p9 shared folders|
 | bhyve-ppt             |Manage bhyve ppt devices|
 | bimport               |Import bhyve from image|
-| blogin                |Exec login into jail|
+| blogin                |Exec login into bhyve|
 | bls                   |List bhyve domain and status|
 | border                |List bhyve run order|
 | border-tui            |Ncurses based bhyve order editor|
