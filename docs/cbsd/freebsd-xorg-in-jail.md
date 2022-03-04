@@ -38,16 +38,16 @@ To Xorg worked successfully in jail, it is necessary to remove the restrictions 
 ```
 And get a kernel with patches applied from the repository **CBSD**.
 
-```
-**Attention**: Due to resource limitations, this patch is applied only for the FreeBSD kernel 11 aka HEAD (as of this writing) in the repository **CBSD**
-```
+!!! attention
 
-```
-**Attention**: **allow_kmem** option violates the concept of jail security and should be used for containerization ONLY YOUR X-jails. Do not enable this feature in the jail that have the potential attackers access.
+    Due to resource limitations, this patch is applied only for the FreeBSD kernel 11 aka HEAD (as of this writing) in the repository **CBSD**
 
-```
+!!! attention
 
-In the presence of these patches, configuration **CBSD** jail will have the option allow_kmem**, which can be set through cbsd jset or **cbsd jconfig**
+    **allow_kmem** option violates the concept of jail security and should be used for containerization ONLY YOUR X-jails. Do not enable this feature in the jail that have the potential attackers access.
+
+
+In the presence of these patches, configuration **CBSD** jail will have the option **allow_kmem**, which can be set through cbsd jset or **cbsd jconfig**
 
 In addition, you may need to add a separate rule for [devfs.ruleset(5)](http://www.freebsd.org/cgi/man.cgi?query=devfs.ruleset&sektion=5), appropriate devices to become visible in the `/dev` directory in jail. For example this content:
 
@@ -82,9 +82,10 @@ The configuration is completed and further work on the launch of Xorg in jail is
 * Run X
 
 
-```
-**Attention**: allow_kmem option violates the concept of jail security and should be used for containerization ONLY YOUR X-jails. Do not enable this feature in the jail that have the potential attackers access.
-```
+!!! Attention
+
+    allow_kmem option violates the concept of jail security and should be used for containerization ONLY YOUR X-jails. Do not enable this feature in the jail that have the potential attackers access.
+
 [Short demo of XJail from scratch.](http://youtu.be/YcfmRnxHRKY)
 
 ## Full Example Step-by-Step: KDE4 in xjail with NVIDIA GL

@@ -105,9 +105,10 @@ iso_extract="bzip2 -d "
 ```
 And of course, it's always useful to see how original images are written, the profile of which can be taken as a basis.
 
-```
-*** If you created a working OS profile, you can send it to the repository https://github.com/cbsd/cbsd-vmprofiles having an account on GitHub, thereby making other users CBSD happy. Also, this profile will be included in the next release of CBSD and you will become participant of the project!
-```
+!!! note
+
+    If you created a working OS profile, you can send it to the repository https://github.com/cbsd/cbsd-vmprofiles having an account on GitHub, thereby making other users CBSD happy. Also, this profile will be included in the next release of CBSD and you will become participant of the project!
+
 Options and their brief description, which appear in the dialogue form. Depending on the type and profile of the OS, some of them may not be available:
 
 * vm_os_type - type of OS. Depending on the type of the guest OS will be offered a particular profile set distributions

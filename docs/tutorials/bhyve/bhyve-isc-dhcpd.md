@@ -42,7 +42,7 @@ or from the ports:
 
 2) The next step is to define the network that will be used in the automatic configuration and writing the corresponding configuration block file for DHCP. Let's say our network will be 198.168.0.0/24, DNS take from Google, and default gateway is 192.168.0.1:
 
-Create directory /root/etc for config file:
+Create directory _/root/etc_ for config file:
 
 ```
 % mkdir /root/etc
@@ -70,7 +70,7 @@ Unfortunately, at the time of this writing, the dhcpd.conf configuration file do
 
 We will know the MAC address and IP address on the stage master/pre/post CBSD. In addition, so that we do not have duplicates with records, records to a particular virtual machine are identified by some sign (for example, in a comment), by which we will find old records and delete before adding a new one. For this purpose, we also need a variable `$jname`.
 
-So, at the input we will receive three parameters - the name of the virtual environment, the physical address (MAC) of the first interface and the IP address. At the output - we add in /root/etc/dhcpd.conf bind the address and MAC and reload the dhcpd daemon. At the end of the script, reboot dhcpd to apply the new configuration.
+So, at the input we will receive three parameters - the name of the virtual environment, the physical address (MAC) of the first interface and the IP address. At the output - we add in _/root/etc/dhcpd.conf_ bind the address and MAC and reload the dhcpd daemon. At the end of the script, reboot dhcpd to apply the new configuration.
 
 Write a script:
 
@@ -103,9 +103,9 @@ printf "host ${jname} { hardware ethernet ${nic_hwaddr0}; fixed-address ${ip4_ad
 
 service isc-dhcpd restart
 ```
-And put it in the catalog /root/bin as /root/bin/make_cbsd_dhcpd.sh:
+And put it in the catalog _/root/bin_ as _/root/bin/make_cbsd_dhcpd.sh_:
 
-In order for DHCPD to run along with the system, we activate it through rc.conf. Also, we specify an alternative path to the configuration file /root/etc/dhcpd.conf: Also, it is desirable to specify the interface on which DHCPD will serve virtual machines. In my case, bhyve machines will be launched by default - creating a tap interface that will be bridged to the uplink interface. On my server is a network interface em0:
+In order for DHCPD to run along with the system, we activate it through rc.conf. Also, we specify an alternative path to the configuration file _/root/etc/dhcpd.conf_: Also, it is desirable to specify the interface on which DHCPD will serve virtual machines. In my case, bhyve machines will be launched by default - creating a [tap(4)](https://www.freebsd.org/cgi/man.cgi?query=tap&sektion=4) interface that will be bridged to the uplink interface. On my server is a network interface em0:
 
 
 ```
@@ -114,11 +114,11 @@ In order for DHCPD to run along with the system, we activate it through rc.conf.
 % sysrc dhcpd_conf="/root/etc/dhcpd.conf"
 ```
 
-```
-*** Attention! *** Be careful if you run DHCPD on a connected physical interface. Because your server will give out addresses not only to virtual bhyve environments, but also all other devices in your network, if they ask them. Moreover, if there is another DHCPD server on your network, you can also disrupt it.
+!!! attention
+
+Be careful if you run DHCPD on a connected physical interface. Because your server will give out addresses not only to virtual bhyve environments, but also all other devices in your network, if they ask them. Moreover, if there is another DHCPD server on your network, you can also disrupt it.
 
 To avoid this, simply block network traffic from the ports on which dhcpd is on the outside. If the interface - em0, it is possible, for example, via ipfw:
-```
 
 ```
 /sbin/ipfw add 5000 deny tcp from me to any dst-port 67-68 via em0 out
@@ -144,7 +144,7 @@ Let's slightly complicate the task, but we will make our life easier in the futu
 
 To do this, we use profiles CBSD, and in particular, we will not even create a separate profile for our DHCP machines, It is enough to reassign the path where to take directories with hooks in the default template.
 
-Create /root/share directory, where we will store alternative content of system-directories for newly created environments:
+Create _/root/share_ directory, where we will store alternative content of system-directories for newly created environments:
 
 ```
 % mkdir /root/share
@@ -155,13 +155,13 @@ Copy the standard directory tree from the distribution CBSD, it does not contain
 % cp -a ~cbsd/share/jail-system-default /root/share
 ```
 
-Perhaps, the script that adds records to dhcpd.conf is quite versatile and we do not need to copy it to each created environment. We will dispense with symbolic links that will point to it. To do this, go to the **master_prestart.d** directory, template and specify [ln](http://man.freebsd.org/pkg/1)to the source script:
+Perhaps, the script that adds records to dhcpd.conf is quite versatile and we do not need to copy it to each created environment. We will dispense with symbolic links that will point to it. To do this, go to the **master_prestart.d** directory, template and specify [ln(1)](https://www.freebsd.org/cgi/man.cgi?query=ln) to the source script:
 
 ```
 % cd /root/share/jail-system-default/master_prestart.d
 % ln -sf  /root/bin/make_cbsd_dhcpd.sh
 ```
-And will reassign the path to the skel-directory to our copy, through the configuration file ~cbsd/etc/bhyve-default-default.conf, parameters in which will overwrite file parameters of ~cbsd/etc/defaults/bhyve-default-default.conf
+And will reassign the path to the skel-directory to our copy, through the configuration file _~cbsd/etc/bhyve-default-default.conf_, parameters in which will overwrite file parameters of _~cbsd/etc/defaults/bhyve-default-default.conf_
 
 ```
 echo 'systemskeldir="/root/share/jail-system-default"' > ~cbsd/etc/bhyve-default-default.conf
@@ -207,7 +207,7 @@ Superior script would look like in the following way:
 #!/bin/sh
 # Helper for integration CBSD/bhyve and isc-dhcpd
 # We assume bhyve have correct 'ip4_addr' settings
-# To add dhcpf.conf extra-config (e.g. bootp-related) for
+# To add dhcpd.conf extra-config (e.g. bootp-related) for
 #    hosts ${jname} {  ..  }
 #    please use file in ${jailsysdir}/${jname}/dhcpd_extra.conf
 #    << all content from this file will be dropped to { } block

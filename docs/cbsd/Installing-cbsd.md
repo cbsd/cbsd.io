@@ -81,7 +81,7 @@ d) create links of the rc.d scripts to start **CBSD** at system startup and crea
 
 **2) Initial setup**
 
-In the classic install, there are two copies of **CBSD**. One of them (`/usr/local/cbsd`), contains a distribution kit, initial code and configuration files by default. This copy can qlwo be used to manage jails in case the main copy is damaged (for example after an incorrect update). Scripts to work with can be found in the environment variable **workdir**.
+In the classic install, there are two copies of **CBSD**. One of them (`/usr/local/cbsd`), contains a distribution kit, initial code and configuration files by default. This copy can also be used to manage jails in case the main copy is damaged (for example after an incorrect update). Scripts to work with can be found in the environment variable **workdir**.
 
 To initialize the main working copy of **CBSD** we need to run **initenv**, while setting the environment variable **workdir** to the location of the working directory. We then answer a series of questions to complete the configuration. The file system for **CBSD** (or rather, the directory jails-data in it) needs to be large enough to accommodate the jail's data. After finalizing the location of the working directory, ensure it is set as the home directory for **CBSD** user (in this case the working directory in `/usr/jails`):
 

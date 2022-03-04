@@ -38,7 +38,7 @@ ip4_addr="10.0.0.5/24";
 ```
 
 IP address of the jail. If you plan to use multiple IP addresses, they are separated by commas:
-ip4_addr="10.0.0.5/24,192.168.0.2/30,54:04:a6:b2:11:c4/64«;
+ip4_addr="10.0.0.5/24,192.168.0.2/30,2001:db8::1/64"
 
 ```
 mount_devfs="1";
@@ -263,7 +263,7 @@ means that the processes will only run on first core
 ```
 cpuset="0-3"
 ```
-means that the processes will only run on first core
+means that the processes will run the from the first through the fourth cores.
 
 ```
 cpuset="0,3"

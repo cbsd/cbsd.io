@@ -54,21 +54,31 @@ How to:
   192.168.1.0/24
   set's one IP from this network in the hoster side:
 
-  ifconfig tap2 192.168.1.1/24
+```
+ifconfig tap2 192.168.1.1/24
+```
+
 *  6) via VNC enter into bhyve instance and sets second IP from this network:
 
-  ifconfig vtnet0 up
-  ifconfig vtnet0 192.168.1.2/24
+```
+ifconfig vtnet0 up
+ifconfig vtnet0 192.168.1.2/24
+```
 
   Now, bhyve can ping hoster via:
 
-  ping 192.168.1.1
+```
+ping 192.168.1.1
+```
 
   And you can set default route to hoster and route traffic as usual:
   (on bhyve):
-  route add default 192.168.1.1
 
-  Also, bhyve with 192.168.1.1 available from hoster via 'ssh 192.168.1.2'
+```
+route add default 192.168.1.1
+```
+
+  Also, bhyve with 192.168.1.1 available from hoster via `ssh 192.168.1.2`
 
 ## Options 3: VALE switch
 
@@ -85,7 +95,7 @@ b1   b2
 |   \
 b3   b4
 
-bhyve (b1) can ping (b2), and (b3) can ping (b4), but other host is unavailable.
+bhyve **b1** can ping **b2** and **b3** can ping **b4** but other host is unavailable.
 
 Howto:
 

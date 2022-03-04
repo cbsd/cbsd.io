@@ -7,7 +7,7 @@ commands&mdash;can **CBSD** be useful for you in this case?
 
 This article describes an example of creating and managing a **CBSD**
 cluster via an asynchronous interface using a minimalistic and fast
-[net/beanstalkd](http://xph.us/software/beanstalkd/) broker. Instead of
+[net/beanstalkd](https://beanstalkd.github.io/) broker. Instead of
 **beanstalkd**, any other broker can act, such as ActiveMQ, ZeroMQ,
 RabbitMQ or Kafka. By convention, let's call this a low level of
 virtual machine management, which provides delivery and return of

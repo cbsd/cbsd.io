@@ -8,7 +8,9 @@
 
 **Description:**
 
-***This feature available from **CBSD 11.1.7** and above.***
+!!! note
+
+    This feature available from **CBSD 11.1.7** and above.
 
 Shared folders are used to exchange files between virtual machines or between a virtual machine and a host system.
 
