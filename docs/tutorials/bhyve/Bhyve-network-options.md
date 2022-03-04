@@ -86,15 +86,11 @@ route add default 192.168.1.1
 
 For example:
 
-[sw1]
-|   \
-b1   b2
-
-
-[sw2]
-|   \
-b3   b4
-
+```mermaid
+graph TB
+SW1 --> B1 & B2
+SW2 --> B3 & B4
+```
 bhyve **b1** can ping **b2** and **b3** can ping **b4** but other host is unavailable.
 
 Howto:
