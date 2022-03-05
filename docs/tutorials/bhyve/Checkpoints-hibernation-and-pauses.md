@@ -17,10 +17,13 @@ cbsd bcheckpoint [jname=] [mode=] [name=] [poweroff=]
 ```
 where:
 
-* **jname**: (required) the name of the environment, for example: freebsd1
-* **mode**: (required) action relative to the environment: create (create checkpoint), list (list of checkpoints created), destroyall (destroy all checkpoints)
-* **name**: (optional) specify an alternate checkpoint name, by default: checkpoint
-* **poweroff**: (optional). When poweroff=1, CBSD will automatically shut down the virtual machine instantly (via bstop noacpi=1) on the fact of checkpoint creation.
+- **jname**: (required) the name of the environment, for example: freebsd1
+- **mode**: (required) action relative to the environment:
+    * **create**: create checkpoint
+    * **list**: list of checkpoints created
+    * **destroyall**: destroy all checkpoints
+- **name**: (optional) specify an alternate checkpoint name, by default: checkpoint
+- **poweroff**: (optional). When poweroff=1, CBSD will automatically shut down the virtual machine instantly (via bstop noacpi=1) on the fact of checkpoint creation.
 
 ```
   % cbsd bls

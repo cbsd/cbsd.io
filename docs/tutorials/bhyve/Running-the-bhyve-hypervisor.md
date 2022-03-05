@@ -1,4 +1,4 @@
-# Running the bhyve hypervisor in gdb/lldb via CBSD
+# Running the bhyve hypervisor with gdb or lldb debuger engine
 
 **commands: bconfig, bconstruct-tui**
 

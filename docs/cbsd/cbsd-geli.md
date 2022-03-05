@@ -76,7 +76,7 @@ For example, that jail *jail1* on startup mount crypted image in directory `/usr
 webhome.img /usr/home/web geli rw 0 0
 ```
 
-In this case, the file webhome.img must me store in the directory /usr/jails/jails-system/jail1/ (when workdir = /usr/jails).
+In this case, the file webhome.img must be stored in the directory /usr/jails/jails-system/jail1/ (when workdir = /usr/jails).
 
 If you store the crypto image is not in `/usr/jails/jails-system/$jname/` directory, it is necessary to prescribe the full path starting with /. for example:
 

@@ -9,7 +9,9 @@
 
 CBSD allows you to configure bhyve arguments to throw devices into the guest, if your hardware supports it
 
-Attention! Read the information on the page [FreeBSD Wiki: bhyve pci_passthru](https://wiki.freebsd.org/bhyve/pci_passthru)
+!!! attention
+
+    Read the information on the page [FreeBSD Wiki: bhyve pci_passthru](https://wiki.freebsd.org/bhyve/pci_passthru)
 
 In order to mark the device as passthrough, you must put the parameter in `/boot/loader.conf` as described in the wiki page, for example:
 
@@ -23,7 +25,7 @@ If you need to specify more than one device:
 pptdevs="2/0/0 1/2/6 4/9/0"
 ```
 
-Please note that when using pptdevs, **vmm** the module must be initialized on `/boot/loader.conf` stage to pick up these records.
+Please note that when using pptdevs, the **vmm** module must be initialized on `/boot/loader.conf` stage to pick up these records.
 
 If you init/load **vmm** after kernel loading, for example via kldload, then pptdevs will not work.
 

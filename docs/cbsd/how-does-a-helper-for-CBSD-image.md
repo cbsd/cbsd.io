@@ -10,7 +10,7 @@
 
 Prebuilt images for **CBSD** represent an archive of environment and a sequence scenario, formed by one of the configurations derived from the state of the environment.
 
-Since most of the modifications associated with personal data (passwords, user names or domain name databases, etc.), to mining scenario must be received all necessary parameters - sta je ovde pisac hteo da kaze? da budemo sigurni da mu trebaju svi parametri? Starting with version **CBSD** 10.1.0, entering the settings dialog executes the script imghelper, which takes parameters for construction of the SQLite3 database that runs along with the jail
+Since most of the modifications associated with personal data (passwords, user names or domain name databases, etc.), to mining scenario must be received all necessary parameters <!-- sta je ovde pisac hteo da kaze? da budemo sigurni da mu trebaju svi parametri? --> Starting with version **CBSD** 10.1.0, entering the settings dialog executes the script imghelper, which takes parameters for construction of the SQLite3 database that runs along with the jail
 
 Here we will analyze the construction of the classical dialog-based menu.
 

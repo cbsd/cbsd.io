@@ -83,7 +83,7 @@ To automatically update CRC amounts in profiles, you can use the fetch_iso scrip
 
 If you have the processing power available on the Internet (hosting, data center, etc.), you can create your own **CBSD mirror** and publish a link to your profiles in it virtual machines. So, you become a participant in the **CBSD** project and help your region (country) get, perhaps, the best mirror for them.
 
-n addition, for those who want to help the project with a local mirror in your resources, in the RO mode, an rsync server is open, from which you can initiate through cron content synchronization. The URL of this property is `rsync://electro.bsdstore.ru/iso/`. If your mirror is accessible from the Internet, you can send pull-request to **GitHub** to the repository [https://github.com/cbsd/cbsd-vmprofiles](https://github.com/cbsd/cbsd-vmprofiles) by adding your mirror to **cbsd_iso_mirrors=**. With the release of the new version of **CBSD** your mirror will go to **CBSD**.
+In addition, for those who want to help the project with a local mirror in your resources, in the RO mode, an rsync server is open, from which you can initiate through cron content synchronization. The URL of this property is `rsync://electro.bsdstore.ru/iso/`. If your mirror is accessible from the Internet, you can send pull-request to **GitHub** to the repository [https://github.com/cbsd/cbsd-vmprofiles](https://github.com/cbsd/cbsd-vmprofiles) by adding your mirror to **cbsd_iso_mirrors=**. With the release of the new version of **CBSD** your mirror will go to **CBSD**.
 
 ## How to setup a mirror, HowTo
 

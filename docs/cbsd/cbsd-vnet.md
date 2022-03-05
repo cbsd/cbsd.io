@@ -19,7 +19,9 @@ vnet-featured jail has at its disposal a fully virtualized and isolated network 
 
 When you create a vnet-jails the **ip4_addr** should indicate **0**, which prohibit **CBSD** set itself an IP address for vnet jail.
 
-*Note: The installation of IP addresses in the vnet jail is not implemented yet*
+!!! note
+
+    The installation of IP addresses in the vnet jail is not implemented yet
 
 Also, if you want to get a jail itself an IP address automatically (via DHCP), you would write a separate section devfs.rules, in which you need to open [bpf(4)-device](http://www.freebsd.org/cgi/man.cgi?query=bpf&sektion=) ( unhide bpf*).
 
@@ -40,7 +42,9 @@ Also, if you completely trust the container and the applications that are runnin
 
 CBSD creates virtual interfaces using a pair of [epair(4)](http://www.freebsd.org/cgi/man.cgi?query=epair&sektion=4), but the "other end" virtual cable that connects to the jail, **CBSD** renamed to **eth0** interface.
 
-*Note: : Rename this is relevant only for FreeBSD jails. If a jail is run as Linux-based, renaming will not happen.*
+!!! note
+
+    Rename this is relevant only for FreeBSD jails. If a jail is run as Linux-based, renaming will not happen.
 
 Renaming to **eth0** by the fact that each new epair increments the number of the interface, those of the first **vnet**-jail in original, interface will be called as epair**0**a. When you running the fifth of jails, in last jail interface will be called as epair**5**a. It's not very convenient whith jail migrating (on another server, it may be a different number), and definitely not convenient that every time you have to correct the contents of the rc.conf with the network setup.
 

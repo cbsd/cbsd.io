@@ -4,7 +4,7 @@
 
 ```
 % cbsd cpu-topology
-% cbsd vm-cpu-topology vm-cpu-topology-tui
+% cbsd vm-cpu-topology
 % cbsd vm-cpu-topology-tui
 ```
 **Description:**
