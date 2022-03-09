@@ -17,9 +17,9 @@ Unessential argument:
 
 * **port** = alternative number of sshd port. By default, nodes of **CBSD** use port 22222 for connection on SSH.
 
-```
-*** Attention: the password of CBSD user is used only at the moment of receiving a private key. Respectively, access on the server will be until the key won't be removed or re-generated. Change of the password of the user account in this case won't work.
-```
+!!! attention
+
+    The password of CBSD user is used only at the moment of receiving a private key. Respectively, access on the server will be until the key won't be removed or re-generated. Change of the password of the user account in this case won't work.
 
 **Example:**
 

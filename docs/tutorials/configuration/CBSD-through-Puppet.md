@@ -4,13 +4,12 @@ When you operate a large number of nodes and containers, handmade container mana
 
 There are many of today's popular configuration management systems: Ansible, Chef, Saltstack, Puppet etc., written in different languages and with different concepts and principles of.
 
-At this point, we support CBSD module for Puppet and here is a brief information on its use.
+At this point, we support a [CBSD module for Puppet](https://forge.puppet.com/olevole/cbsd)
 
-Project page at **Puppet Forge:** [CBSD puppet](https://forge.puppet.com/olevole/cbsd)
-Description - for which this module
 
-Puppet CBSD
-module allows to write server configuration using declarative programming (Ruby DSL, domain-specific language).
+## How to use puppet with the CBSD puppet module
+
+Puppet CBSD module allows to write server configuration using declarative programming (Ruby DSL, domain-specific language).
 
 In other words, you create a manifesto describing what the container and with what parameters and characteristics should be on a particular server.
 
