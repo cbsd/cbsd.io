@@ -36,9 +36,9 @@ or
 
 to launch multiple jails by one command)
 
-When ( You can change this behavior in cbsd initenv-tui ) **parallel=0** and you try to launch/stoping a few jails, start/stop will be held consecutively. It is not always good, as any error triggered inside jails in the rc-scripts, which leads to a pause, can block start/stop next jails. In the case when **parallel** have a non-zero value, each next jails will be launched/stopped in N seconds after the previous one, where N — **parallel** value. After this timeout, no matter whether the previous jail o start fully and next jail will be started.
+When ( You can change this behavior in cbsd initenv-tui ) **parallel=0** and you try to launch/stop a few jails, start/stop will be held consecutively. It is not always good, as any error triggered inside jails in the rc-scripts, which leads to a pause, can block start/stop next jails. In the case when **parallel** have a non-zero value, each next jails will be launched/stopped in N seconds after the previous one, where N — **parallel** value. After this timeout, no matter whether the previous jail o start fully and next jail will be started.
 
-To stoping jail **jstop** must be used, with the same syntax and behavior:
+To stop a jail **jstop** must be used, with the same syntax and behavior:
 
 ```
 % cbsd jstop jname=jail1
@@ -64,7 +64,7 @@ With a large number of jails (particularly databases, with services such as MySQ
 
 Additionally, when a shutdown command is running on the server with lots of jails/services that should be taken into consideration low timeout that defaults to perform rc.shutdown sequence. In this regard, the process init(8) can interrupt the rc-scripts on this timeout, resulting in abnormal shutdown jails. In this case, the database can lead to nonconservation or damage data. To avoid this, **/etc/rc.conf** master system should be adjusted parameter **rcshutdown_timeout** to a more reasonable value (default: 90 seconds)
 
-In the absence of rcshutdown_timeout in the system /etc/rc.conf, cbsd initenv will put this option in its sole discretion automatically.
+In the absence of rcshutdown_timeout in the system _/etc/rc.conf_, cbsd initenv will put this option in its sole discretion automatically.
 
 Also, keep in mind that when using the zfs features (`$workdir/nc.inventory`, the parameter **zfsfeat=1**), and the file system ZFS, at jstop, file system of jails will be unmounted and those catalog `$workdir/jails-data/jail1-data` will be empty. If in such a case when jail data is requires without running it, by the command **zfs list** You can see the name appropriate file system and run zfs mount **fs**.
 

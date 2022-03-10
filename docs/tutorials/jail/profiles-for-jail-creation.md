@@ -14,9 +14,9 @@ For example, you do not work with a huge number of nodes and environments, when 
 
 Take a look on content of `$workdir/etc/defaults/jail-freebsd-default.conf` file. It represents the settings that are used in jconstruct-tui by default.
 
-Let's say you want to create a container always in **baserw=1** mode (instead of baserw=0 by default), on interface **lo0** (instead of auto, which selects the interface depending on the subnet jail) and you prefer a name **cell** instead of jail wih domain **example.com** and at the same time, container must be launched instantly after creation ( runasap="1" ) ( do not confuse with astart="1" for lauch on boot)
+Let's say you want to create a container always in **baserw=1** mode (instead of baserw=0 by default), on interface **lo0** (instead of auto, which selects the interface depending on the subnet jail) and you prefer a name **cell** instead of jail with domain **example.com** and at the same time, container must be launched instantly after creation ( runasap="1" ) ( do not confuse with astart="1" for launch on boot)
 
-To do this, create in the directory (or copy from $workdir/etc/defaults) $workdir/etc/ file with same name, in which we can reassign the settings:
+To do this, create in the directory (or copy from _$workdir/etc/defaults_) _$workdir/etc/_ file with same name, in which we can reassign the settings:
 
 ```
 % echo 'baserw="1"' > ~cbsd/etc/jail-freebsd-default.conf
@@ -38,7 +38,7 @@ So we got file `$workdir/etc/jail-freebsd-default.conf` with follow content:
 
 It's all! Now we can run **cbsd jconstruct-tui**, where you need to do even fewer settings to create an environment!
 
-You may want to create several profiles of your own. To do this, also create the files in the directory ~cbsd/etc/ by using in the name of file prefix: `jail-freebsd-YOUR_PROFILE.conf`
+You may want to create several profiles of your own. To do this, also create the files in the directory _~cbsd/etc/_ by using in the name of file prefix: `jail-freebsd-YOUR_PROFILE.conf`
 
 In this case, as the _invariant_ parameter within each profile, there must be a name for this profile in the variable **jail_profile="default"**. For example, let's create two profiles: baserw and **lo0**:
 
@@ -59,7 +59,7 @@ Perhaps you want the profile lo0 to be the default, since you use it most often.
 ```
 % echo 'default_profile="lo"' > ~cbsd/etc/jail-freebsd-default.conf
 ```
-The contents of the file ~cbsd/etc/jail-freebsd-default.conf will be:
+The contents of the file _~cbsd/etc/jail-freebsd-default.conf_ will be:
 
 		default_profile="lo"
 
@@ -69,7 +69,7 @@ In this case, when you execute **cbsd jconstruct-tui**, you do not even need to 
 
 **Description**
 
-Suppose you need to create a series of alike jails which all require a certain set of software and configuration,for example an environment with running an nginx http server with a custom index.html. One way to achieve this is to create a jail (eg jail1), perform all necessary adjustments and do a **jexport**. Afterwards whenever you need a new instance, run the command:
+Suppose you need to create a series of alike jails which all require a certain set of software and configuration,for example an environment with running an nginx http server with a custom index.html. One way to achieve this is to create a jail (e.g. jail1), perform all necessary adjustments and do a **jexport**. Afterwards whenever you need a new instance, run the command:
 
 ```
 % cbsd jimport jname=jail1 newjname=jail2
@@ -162,7 +162,7 @@ EOF
 ```
 3) skel-directories
 
-Custimize directories of additional files that are copied to the jail. Namely - prescribe nginx in rc.conf inside the jail and push into `/usr/local/www/nginx/index.html` some text to output:
+Customize directories of additional files that are copied to the jail. Namely - prescribe nginx in rc.conf inside the jail and push into `/usr/local/www/nginx/index.html` some text to output:
 
 ```
 % cp -a /usr/local/cbsd/share/jail-skel /root/share/nginx-jail
@@ -214,6 +214,6 @@ echo 'default_profile="XXX"' > ~cbsd/etc/jail-freebsd-default.conf
 ```
 
 
-```
-*** Please note that the files in the $workdir/etc/defaults can not be edited - as well as in the /etc/defaults. If you want to override the default values, copy the directory $workdir/etc/defaults file with the same name in the directory $workdir/etc and change
-```
+!!! note
+
+    The files in the _$workdir/etc/defaults_ can not be edited - as well as in the _/etc/defaults_. If you want to override the default values, copy the directory _$workdir/etc/defaults_ file with the same name in the directory _$workdir/etc_ and change

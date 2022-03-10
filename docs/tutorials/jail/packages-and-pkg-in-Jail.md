@@ -7,9 +7,9 @@
 ```
 **Description:**
 
-**cbsd pkg** - is wrapper around standart FreeBSD [pkg(7)](http://man.freebsd.org/pkg/7) tools to use **jname** argument for more comfort work with the jail from the master host
+**cbsd pkg** - is wrapper around standard FreeBSD [pkg(7)](http://man.freebsd.org/pkg/7) tools to use **jname** argument for more comfort work with the jail from the master host
 
-Via **mode=** argument indicating a needet action. Values can be:
+Via **mode=** argument indicating a needed action. Values can be:
 
 *  **add, install** - to install packages
 *  **remove** - to remove packages

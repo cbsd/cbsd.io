@@ -14,7 +14,7 @@ Command
 ```
 % cbsd jdescr mode=update jname=jname
 ```
-runs **nvi** in edit mode and opens the description of the jail specified by **jname**. If you prefer using a different editor such (such as vim or **mcedit** it can easily be done by passing your choice with the **editor** variable. Descriptions for each jail are stored in a text file residing at `$workdir/jails-system/$jname/descr`, where **jname** is the name of the jail. When a jail is moved or copied with jcoldmigrate, jclone, jimport/export operations, the description will remain the same.
+runs `nvi` in edit mode and opens the description of the jail specified by **jname**. If you prefer using a different editor such (such as `vim` or `mcedit` it can easily be done by passing your choice with the **EDITOR** variable. Descriptions for each jail are stored in a text file residing at `$workdir/jails-system/$jname/descr`, where **jname** is the name of the jail. When a jail is moved or copied with jcoldmigrate, jclone, jimport/export operations, the description will remain the same.
 
 **Example** (running mcedit to modify the kde4 jail using russian UTF8 charset):
 
