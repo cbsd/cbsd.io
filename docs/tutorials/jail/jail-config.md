@@ -75,9 +75,13 @@ If you want to attach separate ZFS filesystems in jail (ie, want to be able to p
 zroot/jail1_webfs /usr/home/web zfs rw 0 0
 ```
 
-Note: mount point (/usr/home/web in this example) is not important
+!!! note
 
-Note: jail must have allow_zfs paramaters set to 1, what can be done via cbsd jconfig **jname=$jnamei**
+    Mount point (/usr/home/web in this example) is not important.
+
+!!! note
+
+    Jail must have allow_zfs paramaters set to 1, what can be done via cbsd jconfig **jname=$jnamei**.
 
 In fact, it makes **CBSD** execute commands:
 
@@ -128,7 +132,7 @@ You can write your own scripts to be executed within the jail and in the master 
 
 Write scripts to the master_\* directories can be useful if at the start-stop jail you need to perform some action is not associated with content of environment - for example, create a ZFS snapshot, put rules in IPFW and etc.
 
-In scripts, you can use CBSD variables, such as **$jname, $path, $data, $ip4_addr,** for example, by placing a script (with execute permission) in `/usr/jails/jails-system/jail1/master_poststart.d/notify.sh`:
+In scripts, you can use CBSD variables, such as **$jname**, **$path**, **$data**, **$ip4_addr**, for example, by placing a script (with execute permission) in `/usr/jails/jails-system/jail1/master_poststart.d/notify.sh`:
 
 ```
 #!/bin/sh

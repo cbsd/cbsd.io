@@ -22,7 +22,7 @@ Additional arguments:
 *    **jname** — specifies the jail upon which the action will be performed
 *    **snapname** — gives the snapshot a name
 
-It should be kept in mind that snapshots follow a tree structure. This means, if you created a series of snapshots : **1,2,3,4** and roll back to snapshot **2**, then the snapshots **3** and **4** will be lost, since from the point of snapshot **2** they did not exist yet. Also use a unique name for a snapshot at creation. You can specify snapname=gettimeofday. In this case, the system automatically sets the current timestamp as the name for the new snapshot. When listing snapshots, you can use modifiers to customize output fields with arguments to **display=**
+It should be kept in mind that snapshots follow a tree structure. This means, if you created a series of snapshots : **1**,**2**,**3**,**4** and roll back to snapshot **2**, then the snapshots **3** and **4** will be lost, since from the point of snapshot **2** they did not exist yet. Also use a unique name for a snapshot at creation. You can specify snapname=gettimeofday. In this case, the system automatically sets the current timestamp as the name for the new snapshot. When listing snapshots, you can use modifiers to customize output fields with arguments to **display=**
 
 **Example:**
 

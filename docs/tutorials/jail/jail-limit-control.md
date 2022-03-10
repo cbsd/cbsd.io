@@ -12,15 +12,15 @@
 
 ## File quotas
 
-Floating file quotas are only possible for jails residing on **ZFS**-file system. For systems stored on **UFS** a similar restrictions can be enforced using an md(4)-based vnode file/image and making use of **mdsize** for the jail).
+Floating file quotas are only possible for jails residing on **ZFS**-file system. For systems stored on **UFS** a similar restrictions can be enforced using an [md(4)](https://www.freebsd.org/cgi/man.cgi?query=md)-based vnode file/image and making use of **mdsize** for the jail).
 
 ## Renice prioritization
 
-**CBSD** uses [renice(8)](http://www.freebsd.org/cgi/man.cgi?query=renice&sektion=8) to prioritize each jail's access to the CPU. This makes it possible to select different priorities on a per jail basis and give the most impoartant jails the highest share of CPU time. For example, you may want to have your distcc jail set to a low priority, give your web server medium and the jail hosting the databse the highest priority. The actual priorization is taken care of by nice which gets the value for each jail from jail rctl. The values set here correspond to the behavior of **nice**(1) — the lowest integer resulting in the highest priority.
+**CBSD** uses [renice(8)](http://www.freebsd.org/cgi/man.cgi?query=renice&sektion=8) to prioritize each jail's access to the CPU. This makes it possible to select different priorities on a per jail basis and give the most important jails the highest share of CPU time. For example, you may want to have your distcc jail set to a low priority, give your web server medium and the jail hosting the database the highest priority. The actual prioritization is taken care of by [nice(1)](https://www.freebsd.org/cgi/man.cgi?query=nice) which gets the value for each jail from jail rctl. The values set here correspond to the behavior of **nice**(1) — the lowest integer resulting in the highest priority.
 
 Renice example:
 
-1) Let's create an AMP jail and have it run a php script that performs some work (such as [bench.zip](/files/bench.zip) taken from [php-benchmark-script](http://www.php-benchmark-script.com/)). We then clone the jail, calling the first **highprio1** and the second **lowprio1**. Using **cbsd jrctl-tui** we give the first the highest possible priority **-20**, and set the second jail to the lowest priority of **20**. In addition we limit the jail to one core through **cpuset** with **cbsd jconfig*** (single-core systems are hard to come by these days and smart schedulers do not allow for a clean experiment without taking this step ;-).
+1) Let's create an AMP jail and have it run a php script that performs some work (such as [bench.zip](/files/bench.zip) taken from [php-benchmark-script](http://www.php-benchmark-script.com/)). We then clone the jail, calling the first **highprio1** and the second **lowprio1**. Using **cbsd jrctl-tui** we give the first the highest possible priority **-20**, and set the second jail to the lowest priority of **20**. In addition we limit the jail to one core through **cpuset** with **cbsd jconfig** (single-core systems are hard to come by these days and smart schedulers do not allow for a clean experiment without taking this step ;-).
 
 ```
 % cbsd jls display=jid,jname,ip4_addr,cpuset

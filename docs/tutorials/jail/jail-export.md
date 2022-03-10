@@ -8,9 +8,10 @@
 
 **Description:**
 
-```
-*** Attention: *** command execution allows on jail in status On. However it is necessary to remember (especially for jail with databases) when you import such jails, with a high probability it is possible to got problems with inconsistency filesystem in jails, old .pid files that can break work of the imported jails
-```
+!!! attention
+
+    command execution allows on jail in status On. However it is necessary to remember (especially for jail with databases) when you import such jails, with a high probability it is possible to got problems with inconsistency filesystem in jails, old .pid files that can break work of the imported jails
+
 Export jail into file (*.img). In **jname** arguments you can set jail for export. img-file stored in `$workdir/export` directory. Original jail after exports is not modified
 
 You can control compress level via **compress** arguments

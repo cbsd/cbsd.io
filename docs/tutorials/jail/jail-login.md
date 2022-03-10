@@ -32,7 +32,7 @@ The file can be placed for the individual environment in the directory `$workdir
 
 With a custom call, you can use CBSD variables - for this or that environment
 
-For example, if you want instead of the standard behavior, when the blogin lauched ssh client, the file `$workdir/etc/blogin.conf` can look like this:
+For example, if you want instead of the standard behavior, when the blogin launched ssh client, the file `$workdir/etc/blogin.conf` can look like this:
 
 ```
   login_cmd="/usr/bin/ssh your_user@${ipv4_first}"

@@ -19,7 +19,7 @@ Optional parameters:
 * **host_hostname** — FQDN, new full hostname of jail
 * **ip4_addr** — new IP address of the jail (if multiple IPs, separated by a comma with no spaces)
 
-**Example** (renaming jail **jail1** into **jail50** with a FQDN and ip addresses change):
+**Example** (renaming jail **jail1** into **jail50** with a FQDN and IP addresses change):
 
 ```
 % cbsd jrename old=jail1 new=jail50 host_hostname=jail50.my.domain ip4_addr=192.168.0.5/24

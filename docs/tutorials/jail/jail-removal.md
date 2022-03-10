@@ -10,7 +10,7 @@
 Removal of jail mentions all files anyway connected with a jail:
 
     a) fstab for current jail
-    b) data directory or ZFS filesystem with jail data
+    b) data directory or ZFS file system with jail data
     c) statistics and description for jail
     d) snapshots
 

@@ -2,7 +2,7 @@
 
 Between manual control of each Jail using **cbsd jlogin** and the setting up of centralized orchestration systems like **Puppet** or **Ansible** stay a method based on scripts in the language Shell.
 
-Using framework **cbsd** and command like `jset/jget/jconfig/jexec` you can implement quite complex scenarios for the configuration and management of multiple cells.
+Using framework **cbsd** and command like `jset`/`jget`/`jconfig`/`jexec` you can implement quite complex scenarios for the configuration and management of multiple cells.
 
 Below are examples of writing such scripts to solve all sorts of group tasks inside Jails.
 

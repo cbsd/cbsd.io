@@ -19,7 +19,7 @@ If the file system is UFS, you can create an image of the jail through:
 ```
 % cbsd jexport jname=jail1
 ```
-And in the case of success, remove the image jail1.img from `$workdir/export` directory. An upgrade jail **CBSD**, we assume only update files base FreeBSD. Upgrade procedure 3rd-party software in jails similar to upgrade in the non-jail system. You can update the database as between different versions of the system (eg from version 9.2 to FreeBSD 9.3 or FreeBSD 9.3 -> FreeBSD 10.1), and update the files within the same version. It should be remembered that the jails have two modes — **baserw=1**, when the base part of each jail — have their own copy located in the directory `$workdir/jails-data/$jail`, and **baserw=0**, when one and the same base dir `${workdir}/basejail/base_\*_\*_ver` mounted to all jails.
+And in the case of success, remove the image jail1.img from `$workdir/export` directory. An upgrade jail **CBSD**, we assume only update files base FreeBSD. Upgrade procedure 3rd-party software in jails similar to upgrade in the non-jail system. You can update the database as between different versions of the system (e.g. from **FreeBSD 9.2** to **FreeBSD 9.3** or **FreeBSD 9.3** -> **FreeBSD 10.1**), and update the files within the same version. It should be remembered that the jails have two modes — **baserw=1**, when the base part of each jail — have their own copy located in the directory `$workdir/jails-data/$jail`, and **baserw=0**, when one and the same base dir `${workdir}/basejail/base_\*_\*_ver` mounted to all jails.
 
 ## Jupgrade command
 
@@ -90,7 +90,7 @@ On the next run, the jails will mount base 10.0 (on screenshot the base in the s
 
 Upgrade of **baserw=1** takes a different scenario, since on this operation CBSD will overwrite the old base system files to the new in jail data directory `$workdir/jails-data/$jname`.
 
-Baseline: we need uprgade jail jail1 **baserw=1** mode (in-law, its root path PATH points in jls pointed to jails-data, rather than jail directory) from 9.2 to 10.0 version.
+Baseline: we need upgrade jail jail1 **baserw=1** mode (in-law, its root path PATH points in jls pointed to jails-data, rather than jail directory) from 9.2 to 10.0 version.
 
 Verify through the **file** utility, which reads ELF table that file /bin/sh of jails belongs version 9x. And in the same way, check the version of the file after the upgrade:
 
@@ -115,7 +115,7 @@ There are cases when you need to upgrade the files in one version, for example, 
 % cbsd repo action=get sources=base mode=upgrade
 ```
 
-- flags **mode=upgrade** permits to **CBSD** overwrite this directory with new files, if you already have a version of the base for this version. Or, you can build a more recent version of the base, using [Building and upgrading bases](/docs/building-upgrading-bases.md) Also, you can go with the base version with a RELEASE to STABLE (in this case, the name of the base directory will not X.Y, just X. Ie, instead base_\*_\*_9.2 will be used base_\*_\*_9 directory. For this you need in configurator of jail (cbsd jconfig) change the parameter stable=0 to stable=1 (either through cbsd initenv-tui mode is set STABLE branches globally), and do not forget to add stable=1 flags in repo command (if not set globally)
+- flags **mode=upgrade** permits to **CBSD** overwrite this directory with new files, if you already have a version of the base for this version. Or, you can build a more recent version of the base, using [Building and upgrading bases](/docs/building-upgrading-bases.md) Also, you can go with the base version with a RELEASE to STABLE (in this case, the name of the base directory will not X.Y, just X. _i.e._, instead base_\*_\*_9.2 will be used base_\*_\*_9 directory. For this you need in configurator of jail (cbsd jconfig) change the parameter stable=0 to stable=1 (either through cbsd initenv-tui mode is set STABLE branches globally), and do not forget to add stable=1 flags in repo command (if not set globally)
 
 ```
 % cbsd repo action=get sources=base mode=upgrade stable=1

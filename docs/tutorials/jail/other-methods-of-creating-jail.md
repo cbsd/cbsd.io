@@ -59,9 +59,9 @@ interface="auto";
 jailskeldir="${sharedir}/jail-skel"
 ```
 
-```
-*** Note parameters arch and ver. Values of them may be "i386", "amd64" for arch and "9.2", "10.0", "10.1" "11" and so on, depending on the version of the base, which would you prefer for jail. Values native in these parameters force CBSD always take the version and architecture that is running the node, which makes the floating version. So, if you use a template with arch="native", ver="native" and switch from FreeBSD 10.2 to 11.0, it will use the 11.0 version of the base. If you want to fix a specific version - specify version instead native.
-```
+!!! note
+
+    Parameters arch and ver. Values of them may be "i386", "amd64" for arch and "9.2", "10.0", "10.1" "11" and so on, depending on the version of the base, which would you prefer for jail. Values native in these parameters force CBSD always take the version and architecture that is running the node, which makes the floating version. So, if you use a template with arch="native", ver="native" and switch from FreeBSD 10.2 to 11.0, it will use the 11.0 version of the base. If you want to fix a specific version - specify version instead native.
 
 If you want to create jail with installed some packages from **pkg** repository, in this configuration must have an **pkglist** pointing to a file with a list of packages, for example:
 
@@ -79,14 +79,13 @@ lsof
 
 **cbsd jcreate** remove file pointed by **pkglist** variables after jail create
 
-```
-*** Important: ***
+!!! important
 
-When a new jail is created or obtaining from the repository, make it a rule ALWAYS change the user's password root in jail, even if you do not plan to run it ssh/ftp/rsh and similar services. If the jail is created with applytpl=0, by default /etc/{passwd,master.passwd,group} in the jail as the original "clean" files FreeBSD, so password of root user is empty. If jail created with applytpl=1 (it also refers to images from repository) $workdir/share/jail-skel files will be used as templates where root password is 'cbsd' in default CBSD installation. You can change default root password when new jail is created via edit of hash in skel master.passwd via:
+    When a new jail is created or obtaining from the repository, make it a rule ALWAYS change the user's password root in jail, even if you do not plan to run it ssh/ftp/rsh and similar services. If the jail is created with applytpl=0, by default /etc/{passwd,master.passwd,group} in the jail as the original "clean" files FreeBSD, so password of root user is empty. If jail created with applytpl=1 (it also refers to images from repository) $workdir/share/jail-skel files will be used as templates where root password is 'cbsd' in default CBSD installation. You can change default root password when new jail is created via edit of hash in skel master.passwd via:
+    
+    `% vipw -d ${workdir}/share/jail-skel/etc`
+    
+    commands, or specify alternative path to jail-skel dir in .jconf (jcreate tools) config
 
-% vipw -d ${workdir}/share/jail-skel/etc
-
-commands, or specify alternative path to jail-skel dir in .jconf (jcreate tools) config
-```
 By default, the directory specified by **jailskeldir** will be used as source files that will be added (or they will be overwritten with standard files) into a jail automatically when applytpl=1. Accordingly, you can create any configuration templates and content environments that will be copied when creating a new jail.
 
