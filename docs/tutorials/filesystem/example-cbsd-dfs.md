@@ -8,13 +8,13 @@ One such situation is the use of various embedded platforms with very few resour
 
 This will highlight the use of **CBSD** in these installations and describe the How-to-style application notes.
 
-The general requirement for using **CBSD** on DFS, which is typical for any implementations, is turning off the *zfsfeat* option and *hammerfeat* option in 'cbsd initenv-tui' and the need to bring the following directories to the shared store:
+The general requirement for using **CBSD** on DFS, which is typical for any implementations, is turning off the *zfsfeat* option and *hammerfeat* option in `cbsd initenv-tui` and the need to bring the following directories to the shared store:
 
-* ~cbsd/jails-data: directory with container or virtual machine data
-* ~cbsd/jails-system: system directory with additional system information related to the container or virtual machine
-* ~cbsd/jails-rcconf: the directory is used when the environment switches to unregister mode
+* _~cbsd/jails-data_: directory with container or virtual machine data
+* _~cbsd/jails-system_: system directory with additional system information related to the container or virtual machine
+* _~cbsd/jails-rcconf_: the directory is used when the environment switches to unregister mode
 
-If the working directory (**workdir**) is initialized in /usr/jails this is, respectively, the directories:
+If the working directory (**workdir**) is initialized in _/usr/jails_ this is, respectively, the directories:
 
 ```
 /usr/jails/jails-data
@@ -49,7 +49,7 @@ Some DFS, such as NFS and GlusterFS, require additional configuration in pkg.con
 
 Using **CBSD** with NFS (option when NFS is not a dedicated NAS, but one of three **CBSD** nodes)
 
-Through various failover mechanisms, such as carp(4),**pacemaker/corosync, keepalive, sentinel/consul,** you can create a fully automatic faylover when, when you exit the NFS server, any other node is selected as the repository, and the rest are reconfigured to it. However, these settings are beyond the scope of this article, designed to give surface data about DFS.
+Through various failover mechanisms, such as carp(4), **pacemaker/corosync**, **keepalive**, **sentinel/consul**, you can create a fully automated failover when, when you exit the NFS server, any other node is selected as the repository, and the rest are reconfigured to it. However, these settings are beyond the scope of this article, designed to give surface data about DFS.
 
 So, on the first of the three servers we selected as an NFS server, configure the /etc/exports file by listing the IP or subnets of the NFS-merge. We assume that the servers are completely under our control and are completely trusted, since we will be able to export all the directories.
 
@@ -89,7 +89,7 @@ Configuring clients. In our case, the NFS server has an IP address of 192.168.10
 % mount_nfs -o vers=4 192.168.10.201:/usr/jails/jails-rcconf /usr/jails/jails-rcconf
 
 ```
-You can use the /etc/fstab file with the 'late' option to mount directories when the node starts, or use automount ( autofs(5) )
+You can use the _/etc/fstab_ file with the 'late' option to mount directories when the node starts, or use automount ( autofs(5) )
 Now you can create your container on any of the nodes and through a migration or a sequence of commands:
 
 ```
