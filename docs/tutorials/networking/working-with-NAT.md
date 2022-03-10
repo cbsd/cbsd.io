@@ -19,10 +19,9 @@ In this case the NAT translating the private IP address of the jails to external
 ```
 for selecting the appropriate framework for which the configuration will be loaded NAT: pf, ipfw and ipfilter. The names of the relevant frameworks
 
-```
-*** Attention! *** When you configure this, system file /boot/loader.conf nodes will be modified to load the appropriate modules.
+!!! attention
 
-```
+    When you configure this, system file /boot/loader.conf nodes will be modified to load the appropriate modules.
 
 Selection framework and IP for NAT alias executed when you first start **cbsd initenv**, can later be reconfigured through **cbsd initenv-tui** To natip changed in force, you must run **cbsd natcfg** and **cbsd naton** again. Currently, the cbsd configuration NAT limited to the creation of rules for translating private networks. If you need to get something more from simple NAT rule, you can edit the rules file created manually in the directory `$workdir/etc/` in files:
 
@@ -38,9 +37,9 @@ If nodeip (IP of nodes), he is within RFC1918 networks for the subnet broadcast 
 % cbsd natoff
 ```
 
-```
-*** Attention! *** Be careful, if you activate NAT through ipfw. This rule loads the module ipfw.ko, the settings of which are prohibited by default all packets. If you spend this operation remotely, you can through /boot/loader.conf enable ipfw rule, by default allowing all packets:
-```
+!!! attention
+
+    Be careful, if you activate NAT through ipfw. This rule loads the module ipfw.ko, the settings of which are prohibited by default all packets. If you spend this operation remotely, you can through /boot/loader.conf enable ipfw rule, by default allowing all packets:
 
 ```
 ipfw_load="YES"

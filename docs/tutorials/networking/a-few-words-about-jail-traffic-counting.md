@@ -18,7 +18,7 @@ In other words, if you want to count traffic and still have the ability to filte
 
 Collect of traffic occurs 1 time per hour or when stopping the jail and stored in SQLite3 base, located in the system directory jail: `$workdir/jails-system/$jname/traffic/YYYY-MM.sqlite`, where YYYY, MM - year and month.
 
-Example. Enjoying the traffic statistics for the jail kde4. meaning of the fields outgoing and incoming - in bytes:
+**Example**, Enjoying the traffic statistics for the jail kde4. Meaning of the fields outgoing and incoming - in bytes:
 
 ```
 root@home:/ # sqlite3 /usr/jails/jails-system/kde4/traffic/2014-09.sqlite
